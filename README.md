@@ -6,15 +6,21 @@ Python 2.7
 
 ###Installation
 To install the ASMTick mod first download and unpack (or simply clone) this repository. Then run the script `install_mod.py` and specify the minecraft-jar for which you wish to install the mod, e.g.: 
+
 `python2 install_mod.py ~/.minecraft/versions/1.10/1.10.jar`. 
+
 The mod can also be installed on servers this way, however support for servers is still in development and based on several hacks.
 
 
 ###Commands
 ASMTick provides a `tickrate` command which lets you change the speed at which the game runs.
+
 `/tickrate [rate] [client|server]`
+
 Specifying only `rate` will set the tickrate for both the client and the server.
 
 On servers the mod loosens the sleep-lock between server-ticks in order to process commands sent to the server by the player. This feature can be controlled by a more advanced argument:
+
 `/tickrate --server-sleep-lock [ON|OFF|<msec>]`
+
 Turning the server-sleep-lock ON will prevent the server from processing any packets until a tick has finished. Setting it to an integer value will loosen the sleep-lock such that the server checks for packets every `msec` milliseconds.
