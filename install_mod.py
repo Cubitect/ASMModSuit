@@ -5,6 +5,7 @@ import os
 from os.path import join
 import Tkinter as tk
 import tkFileDialog
+import zipfile
 
 if len(sys.argv) <= 1:
     root = tk.Tk()
@@ -26,7 +27,7 @@ if len(sys.argv) <= 1:
         title='ASMTick Installer')
 else:
     jarpath = sys.argv[1]
-    
+
 jardir, jarfile = os.path.split(jarpath)
 vernam = os.path.splitext(jarfile)[0]
 if 'server' in vernam:
@@ -50,15 +51,15 @@ if os.path.isdir(moddir):
 os.makedirs(moddir)
 if not os.path.isdir(classdir):
     os.makedirs(classdir)
-curdir = os.path.abspath(os.path.curdir)
-os.chdir(classdir)
-os.system('jar xvf '+jarpath+' '+devnull)
-os.chdir(curdir)
+zipref = zipfile.ZipFile(jarpath,'r')
+zipref.extractall(classdir)
+zipref.close()
 metadir = join(classdir,'META-INF')
 if side == 'client' and os.path.isdir(metadir):
     shutil.rmtree(metadir)
 
 disasmpy = join(os.path.curdir,'Krakatau-master','disassemble.py')
+asmpy = join(os.path.curdir,'Krakatau-master','assemble.py')
 
 def disasm(classdir,asmdir,className):
     outf = join(asmdir,className)+'.j'
@@ -439,22 +440,20 @@ if side == 'server':
 print 'Reassembling the modded classes...'
 for file in glob.glob(join(temdir,'*.class')):
     shutil.copy(file, moddir)
-asmpy = join(os.path.curdir,'Krakatau-master','assemble.py')
 os.system(asmpy+' -out '+moddir+' -r -q '+moddir)
 for file in glob.glob(join(moddir,'*.class')):
     shutil.copy(file, classdir)
 shutil.copy(join(moddir,serverdir,'MinecraftServer.class'), join(classdir,serverdir))
 
-
 # install the mod
 instver = vernam+'-ASMTick'
 instdir = jardir.replace(vernam,instver)
-instjar = instdir+instver
+instjar = join(instdir,instver+'.jar')
 print 'Installing mod to: '+instdir
 if not os.path.isdir(instdir):
     os.makedirs(instdir)
-os.chdir(classdir)
-os.system('jar cMf ' + join(instdir,instver+'.jar') + ' *')
+instzip = shutil.make_archive(instjar,format="zip",root_dir=classdir)
+os.rename(instzip,instjar)
 
 oldjson = join(jardir,vernam+'.json')
 if(os.path.isfile(oldjson) and side == 'client'):
