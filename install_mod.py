@@ -23,7 +23,7 @@ if len(sys.argv) <= 1:
     if homedir is not None and initdir is None:
         initdir = join(homedir,'.minecraft','versions')
         if not os.path.isdir(initdir):
-            join(homedir,'Library','Application Support','minecraft','versions')
+            initdir = join(homedir,'Library','Application Support','minecraft','versions')
             if not os.path.isdir(initdir):
                 initdir = None
     if initdir is None:
