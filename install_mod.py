@@ -6,20 +6,27 @@ from os.path import join
 import Tkinter as tk
 import tkFileDialog
 import zipfile
+import subprocess
 
 if len(sys.argv) <= 1:
     root = tk.Tk()
     root.withdraw()
     tkFileDialog
 
-    initdir = os.getenv('APPDATA')
-    if initdir is not None and os.path.isdir(initdir):
-        initdir = join(os.getenv('APPDATA'),'.minecraft','versions')
-    if initdir is None or not os.path.isdir(initdir):
-        initdir = join(os.getenv("HOME"),'.minecraft','versions')
-    if initdir is None or not os.path.isdir(initdir):
-        initdir = join(os.getenv("HOME"),'Library','Application Support','minecraft','versions')
-    if initdir is None or not os.path.isdir(initdir):
+    appdata = os.getenv('APPDATA')
+    homedir = os.path.expanduser("~")
+    initdir = None
+    if appdata is not None:
+        initdir = join(appdata,'.minecraft','versions')
+        if not os.path.isdir(initdir):
+            initdir = None
+    if homedir is not None and initdir is None:
+        initdir = join(homedir,'.minecraft','versions')
+        if not os.path.isdir(initdir):
+            join(homedir,'Library','Application Support','minecraft','versions')
+            if not os.path.isdir(initdir):
+                initdir = None
+    if initdir is None:
         initdir = os.path.curdir
     jarpath = tkFileDialog.askopenfilename(
         filetypes=[('jar files','.jar'),('all files', '*')],
@@ -35,10 +42,11 @@ if 'server' in vernam:
 else:
     side = 'client'
 
-asmdir = join(os.path.curdir, 'cache', vernam, 'asm')
-moddir = join(os.path.curdir, 'cache', vernam, 'mod')
-classdir = join(os.path.curdir, 'cache', vernam, 'classes')
-temdir = join(os.path.curdir, 'Templates')
+curdir = os.path.abspath(os.path.curdir)
+asmdir = join(curdir, 'cache', vernam, 'asm')
+moddir = join(curdir, 'cache', vernam, 'mod')
+classdir = join(curdir, 'cache', vernam, 'classes')
+temdir = join(curdir, 'Templates')
 if os.name is 'nt':
     devnull = '> nul'
 else:
@@ -58,8 +66,17 @@ metadir = join(classdir,'META-INF')
 if side == 'client' and os.path.isdir(metadir):
     shutil.rmtree(metadir)
 
-disasmpy = join(os.path.curdir,'Krakatau-master','disassemble.py')
-asmpy = join(os.path.curdir,'Krakatau-master','assemble.py')
+try:
+    fdevnull = open(os.devnull)
+    subprocess.Popen(['python2','--version'], stdout=fdevnull, stderr=fdevnull).communicate()
+    python2 = 'python2'
+except OSError as e:
+    if e.errno == os.errno.ENOENT:
+        python2 = 'python'
+
+
+disasmpy = python2+' '+join(os.path.curdir,'Krakatau-master','disassemble.py')
+asmpy = python2+' '+join(os.path.curdir,'Krakatau-master','assemble.py')
 
 def disasm(classdir,asmdir,className):
     outf = join(asmdir,className)+'.j'
