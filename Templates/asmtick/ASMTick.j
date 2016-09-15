@@ -1,5 +1,5 @@
 .version 52 0 
-.class public super ASMTick 
+.class public super asmtick/ASMTick 
 .super java/lang/Object 
 .field private static final author Ljava/lang/String; = 'Cubitect' 
 .field private static final name Ljava/lang/String; = 'ASMTick' 
@@ -26,7 +26,7 @@ L1:     invokespecial Method java/lang/Object <init> ()V
 L4:     return 
 L5:     
         .linenumbertable 
-            L0 6 
+            L0 8 
         .end linenumbertable 
     .end code 
 .end method 
@@ -34,37 +34,37 @@ L5:
 .method public static setTickServer : (F)V 
     .code stack 2 locals 1 
 L0:     fload_0 
-L1:     putstatic Field ASMTick tickrateServer F 
-L4:     getstatic Field ASMTick tickrateServer F 
+L1:     putstatic Field asmtick/ASMTick tickrateServer F 
+L4:     getstatic Field asmtick/ASMTick tickrateServer F 
 L7:     ldc +200.0f 
 L9:     fmul 
 L10:    f2l 
-L11:    putstatic Field ASMTick serverOverloadWarnTicks J 
-L14:    getstatic Field ASMTick tickrateServer F 
+L11:    putstatic Field asmtick/ASMTick serverOverloadWarnTicks J 
+L14:    getstatic Field asmtick/ASMTick tickrateServer F 
 L17:    fconst_0 
 L18:    fcmpg 
 L19:    ifgt L31 
 L22:    ldc2_w 9223372036854775807L 
-L25:    putstatic Field ASMTick ms2Tick J 
+L25:    putstatic Field asmtick/ASMTick ms2Tick J 
 L28:    goto L41 
 
         .stack same 
 L31:    ldc +1000.0f 
-L33:    getstatic Field ASMTick tickrateServer F 
+L33:    getstatic Field asmtick/ASMTick tickrateServer F 
 L36:    fdiv 
 L37:    f2l 
-L38:    putstatic Field ASMTick ms2Tick J 
+L38:    putstatic Field asmtick/ASMTick ms2Tick J 
 
         .stack same 
 L41:    return 
 L42:    
         .linenumbertable 
-            L0 34 
-            L4 35 
-            L14 36 
-            L22 37 
-            L31 39 
-            L41 41 
+            L0 36 
+            L4 37 
+            L14 38 
+            L22 39 
+            L31 41 
+            L41 43 
         .end linenumbertable 
     .end code 
 .end method 
@@ -74,13 +74,13 @@ L42:
 L0:     fconst_0 
 L1:     fstore_1 
 L2:     fload_0 
-L3:     putstatic Field ASMTick tickrateClient F 
+L3:     putstatic Field asmtick/ASMTick tickrateClient F 
 L6:     return 
 L7:     
         .linenumbertable 
-            L0 46 
-            L2 47 
-            L6 49 
+            L0 48 
+            L2 49 
+            L6 51 
         .end linenumbertable 
     .end code 
 .end method 
@@ -107,52 +107,52 @@ L17:    lconst_1
 L18:    ladd 
 L19:    lstore_2 
 L20:    lload_2 
-L21:    getstatic Field ASMTick ms2Tick J 
+L21:    getstatic Field asmtick/ASMTick ms2Tick J 
 L24:    lload_0 
 L25:    lsub 
 L26:    lcmp 
 L27:    ifge L44 
 L30:    lload_2 
-L31:    getstatic Field ASMTick maxSleep J 
+L31:    getstatic Field asmtick/ASMTick maxSleep J 
 L34:    lcmp 
 L35:    ifgt L44 
-L38:    getstatic Field ASMTick interruptTick Z 
+L38:    getstatic Field asmtick/ASMTick interruptTick Z 
 L41:    ifeq L2 
 
         .stack same 
-L44:    getstatic Field ASMTick interruptTick Z 
+L44:    getstatic Field asmtick/ASMTick interruptTick Z 
 L47:    ifeq L58 
 L50:    ldc 'Server sleep interrupted.' 
-L52:    invokestatic Method ASMTick log (Ljava/lang/String;)V 
+L52:    invokestatic Method asmtick/ASMTick log (Ljava/lang/String;)V 
 L55:    goto L76 
 
         .stack same 
 L58:    lload_2 
-L59:    getstatic Field ASMTick maxSleep J 
+L59:    getstatic Field asmtick/ASMTick maxSleep J 
 L62:    lcmp 
 L63:    iflt L76 
-L66:    getstatic Field ASMTick sleepLock Z 
+L66:    getstatic Field asmtick/ASMTick sleepLock Z 
 L69:    ifne L76 
 L72:    iconst_1 
-L73:    putstatic Field ASMTick interruptTick Z 
+L73:    putstatic Field asmtick/ASMTick interruptTick Z 
 
         .stack same 
 L76:    lload_2 
 L77:    lreturn 
 L78:    
         .linenumbertable 
-            L0 53 
-            L2 57 
-            L6 60 
-            L9 58 
-            L11 59 
-            L16 61 
-            L20 62 
-            L44 64 
-            L50 65 
-            L58 67 
-            L72 68 
-            L76 70 
+            L0 55 
+            L2 59 
+            L6 62 
+            L9 60 
+            L11 61 
+            L16 63 
+            L20 64 
+            L44 66 
+            L50 67 
+            L58 69 
+            L72 70 
+            L76 72 
         .end linenumbertable 
     .end code 
 .end method 
@@ -160,19 +160,19 @@ L78:
 .method public static chatTrigger : (Ljava/lang/String;)V 
     .code stack 1 locals 1 
 L0:     iconst_1 
-L1:     putstatic Field ASMTick interruptTick Z 
+L1:     putstatic Field asmtick/ASMTick interruptTick Z 
 L4:     return 
 L5:     
         .linenumbertable 
-            L0 75 
-            L4 76 
+            L0 77 
+            L4 78 
         .end linenumbertable 
     .end code 
 .end method 
 
 .method public static chatPacketRecieved : (Ljava/lang/String;)V 
     .code stack 2 locals 5 
-L0:     getstatic Field ASMTick isRemoteServer Z 
+L0:     getstatic Field asmtick/ASMTick isRemoteServer Z 
 L3:     ifeq L7 
 L6:     return 
 
@@ -193,14 +193,14 @@ L29:    invokevirtual Method java/util/regex/Matcher find ()Z
 L32:    pop 
 L33:    aload_2 
 L34:    invokevirtual Method java/util/regex/Matcher group ()Ljava/lang/String; 
-L37:    invokestatic Method CommandTickrate parseFloat (Ljava/lang/String;)F 
+L37:    invokestatic Method asmtick/CommandTickrate parseFloat (Ljava/lang/String;)F 
 L40:    fstore_3 
 L41:    fload_3 
 L42:    fconst_0 
 L43:    fcmpl 
 L44:    iflt L51 
 L47:    fload_3 
-L48:    invokestatic Method ASMTick setTickServer (F)V 
+L48:    invokestatic Method asmtick/ASMTick setTickServer (F)V 
 
         .stack append Object java/util/regex/Pattern Object java/util/regex/Matcher Float 
 L51:    aload_2 
@@ -208,31 +208,31 @@ L52:    invokevirtual Method java/util/regex/Matcher find ()Z
 L55:    pop 
 L56:    aload_2 
 L57:    invokevirtual Method java/util/regex/Matcher group ()Ljava/lang/String; 
-L60:    invokestatic Method CommandTickrate parseFloat (Ljava/lang/String;)F 
+L60:    invokestatic Method asmtick/CommandTickrate parseFloat (Ljava/lang/String;)F 
 L63:    fstore 4 
 L65:    fload 4 
 L67:    fconst_0 
 L68:    fcmpl 
 L69:    ifle L77 
 L72:    fload 4 
-L74:    invokestatic Method ASMTick setTickClient (F)V 
+L74:    invokestatic Method asmtick/ASMTick setTickClient (F)V 
 
         .stack chop 3 
 L77:    return 
 L78:    
         .linenumbertable 
-            L0 80 
-            L6 81 
-            L7 82 
-            L16 84 
-            L22 85 
-            L28 86 
-            L33 87 
-            L41 88 
-            L51 89 
-            L56 90 
-            L65 91 
-            L77 93 
+            L0 82 
+            L6 83 
+            L7 84 
+            L16 86 
+            L22 87 
+            L28 88 
+            L33 89 
+            L41 90 
+            L51 91 
+            L56 92 
+            L65 93 
+            L77 95 
         .end linenumbertable 
     .end code 
 .end method 
@@ -269,9 +269,9 @@ L61:    invokevirtual Method java/io/PrintStream println (Ljava/lang/String;)V
 L64:    return 
 L65:    
         .linenumbertable 
-            L0 98 
-            L20 99 
-            L64 100 
+            L0 100 
+            L20 101 
+            L64 102 
         .end linenumbertable 
     .end code 
 .end method 
@@ -279,10 +279,10 @@ L65:
 .method static <clinit> : ()V 
     .code stack 2 locals 0 
 L0:     iconst_0 
-L1:     putstatic Field ASMTick isRemoteServer Z 
+L1:     putstatic Field asmtick/ASMTick isRemoteServer Z 
 L4:     iconst_0 
-L5:     putstatic Field ASMTick sleepLock Z 
-L8:     getstatic Field ASMTick isRemoteServer Z 
+L5:     putstatic Field asmtick/ASMTick sleepLock Z 
+L8:     getstatic Field asmtick/ASMTick isRemoteServer Z 
 L11:    ifeq L20 
 L14:    ldc2_w 50L 
 L17:    goto L23 
@@ -291,31 +291,31 @@ L17:    goto L23
 L20:    ldc2_w 9223372036854775807L 
 
         .stack stack_1 Long 
-L23:    putstatic Field ASMTick maxSleep J 
+L23:    putstatic Field asmtick/ASMTick maxSleep J 
 L26:    ldc +20.0f 
-L28:    putstatic Field ASMTick tickrateClient F 
+L28:    putstatic Field asmtick/ASMTick tickrateClient F 
 L31:    ldc +20.0f 
-L33:    putstatic Field ASMTick tickrateServer F 
+L33:    putstatic Field asmtick/ASMTick tickrateServer F 
 L36:    ldc2_w 50L 
-L39:    putstatic Field ASMTick ms2Tick J 
+L39:    putstatic Field asmtick/ASMTick ms2Tick J 
 L42:    ldc2_w 2000L 
-L45:    putstatic Field ASMTick serverOverloadWarnTicks J 
+L45:    putstatic Field asmtick/ASMTick serverOverloadWarnTicks J 
 L48:    iconst_0 
-L49:    putstatic Field ASMTick interruptTick Z 
+L49:    putstatic Field asmtick/ASMTick interruptTick Z 
 L52:    iconst_0 
-L53:    putstatic Field ASMTick doOnlyQueue Z 
+L53:    putstatic Field asmtick/ASMTick doOnlyQueue Z 
 L56:    return 
 L57:    
         .linenumbertable 
-            L0 17 
-            L4 19 
-            L8 20 
-            L26 22 
-            L31 23 
-            L36 24 
-            L42 25 
-            L48 27 
-            L52 30 
+            L0 19 
+            L4 21 
+            L8 22 
+            L26 24 
+            L31 25 
+            L36 26 
+            L42 27 
+            L48 29 
+            L52 32 
         .end linenumbertable 
     .end code 
 .end method 

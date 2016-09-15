@@ -1,5 +1,5 @@
 .version 52 0 
-.class public super CommandTickrate 
+.class public super asmtick/CommandTickrate 
 .super net/minecraft/command/CommandBase 
 
 .method public <init> : ()V 
@@ -9,7 +9,7 @@ L1:     invokespecial Method net/minecraft/command/CommandBase <init> ()V
 L4:     return 
 L5:     
         .linenumbertable 
-            L0 8 
+            L0 9 
         .end linenumbertable 
     .end code 
 .end method 
@@ -20,7 +20,7 @@ L0:     ldc 'tickrate'
 L2:     areturn 
 L3:     
         .linenumbertable 
-            L0 12 
+            L0 13 
         .end linenumbertable 
     .end code 
 .end method 
@@ -31,7 +31,7 @@ L0:     iconst_2
 L1:     ireturn 
 L2:     
         .linenumbertable 
-            L0 17 
+            L0 18 
         .end linenumbertable 
     .end code 
 .end method 
@@ -42,7 +42,7 @@ L0:     ldc '/tickrate [rate] [client|server]'
 L2:     areturn 
 L3:     
         .linenumbertable 
-            L0 22 
+            L0 23 
         .end linenumbertable 
     .end code 
 .end method 
@@ -52,12 +52,12 @@ L3:
 L0:     aload_0 
 L1:     aload_2 
 L2:     aload_3 
-L3:     invokevirtual Method CommandTickrate processCommand (Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V 
+L3:     invokevirtual Method asmtick/CommandTickrate processCommand (Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V 
 L6:     return 
 L7:     
         .linenumbertable 
-            L0 27 
-            L6 28 
+            L0 28 
+            L6 29 
         .end linenumbertable 
     .end code 
 .end method 
@@ -75,16 +75,16 @@ L11:    dup
 L12:    invokespecial Method java/lang/StringBuilder <init> ()V 
 L15:    ldc '\xa7eServer tickrate = ' 
 L17:    invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
-L20:    getstatic Field ASMTick tickrateServer F 
+L20:    getstatic Field asmtick/ASMTick tickrateServer F 
 L23:    invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L26:    ldc '\n' 
 L28:    invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L31:    ldc '\xa7eClient tickrate = ' 
 L33:    invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
-L36:    getstatic Field ASMTick tickrateClient F 
+L36:    getstatic Field asmtick/ASMTick tickrateClient F 
 L39:    invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L42:    invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L45:    invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L45:    invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L48:    return 
 
         .stack same 
@@ -121,7 +121,7 @@ L96:    ifeq L106
 
         .stack same 
 L99:    iconst_1 
-L100:   putstatic Field ASMTick sleepLock Z 
+L100:   putstatic Field asmtick/ASMTick sleepLock Z 
 L103:   goto L168 
 
         .stack same 
@@ -140,9 +140,9 @@ L125:   ifeq L141
 
         .stack same 
 L128:   iconst_0 
-L129:   putstatic Field ASMTick sleepLock Z 
+L129:   putstatic Field asmtick/ASMTick sleepLock Z 
 L132:   ldc2_w 50L 
-L135:   putstatic Field ASMTick maxSleep J 
+L135:   putstatic Field asmtick/ASMTick maxSleep J 
 L138:   goto L168 
         .catch java/lang/NumberFormatException from L141 to L156 using L159 
 
@@ -153,9 +153,9 @@ L143:   aaload
 L144:   invokestatic Method java/lang/Long parseLong (Ljava/lang/String;)J 
 L147:   lstore_3 
 L148:   lload_3 
-L149:   putstatic Field ASMTick maxSleep J 
+L149:   putstatic Field asmtick/ASMTick maxSleep J 
 L152:   iconst_0 
-L153:   putstatic Field ASMTick sleepLock Z 
+L153:   putstatic Field asmtick/ASMTick sleepLock Z 
 L156:   goto L168 
 
         .stack stack_1 Object java/lang/NumberFormatException 
@@ -163,16 +163,16 @@ L159:   astore_3
 L160:   aload_0 
 L161:   aload_1 
 L162:   ldc '\xa7cSleep lock must be ON, OFF or an integer value' 
-L164:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L164:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L167:   return 
 
         .stack same 
-L168:   getstatic Field ASMTick sleepLock Z 
+L168:   getstatic Field asmtick/ASMTick sleepLock Z 
 L171:   ifeq L184 
 L174:   aload_0 
 L175:   aload_1 
 L176:   ldc 'Sleep lock: \xa7aON\xa77 (Pocessing no packets between ticks)' 
-L178:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L178:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L181:   goto L215 
 
         .stack same 
@@ -183,12 +183,12 @@ L189:   dup
 L190:   invokespecial Method java/lang/StringBuilder <init> ()V 
 L193:   ldc 'Sleep lock: \xa7cOFF\xa77 (Processing packets every ' 
 L195:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
-L198:   getstatic Field ASMTick maxSleep J 
+L198:   getstatic Field asmtick/ASMTick maxSleep J 
 L201:   invokevirtual Method java/lang/StringBuilder append (J)Ljava/lang/StringBuilder; 
 L204:   ldc ' ms)' 
 L206:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L209:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L212:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L212:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 
         .stack same 
 L215:   return 
@@ -197,7 +197,7 @@ L215:   return
 L216:   aload_2 
 L217:   iconst_0 
 L218:   aaload 
-L219:   invokestatic Method CommandTickrate parseFloat (Ljava/lang/String;)F 
+L219:   invokestatic Method asmtick/CommandTickrate parseFloat (Ljava/lang/String;)F 
 L222:   fstore_3 
 L223:   fload_3 
 L224:   fconst_0 
@@ -206,7 +206,7 @@ L226:   ifge L237
 L229:   aload_0 
 L230:   aload_1 
 L231:   ldc '\xa7cTickrate should be a non-negative floating point number' 
-L233:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L233:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L236:   return 
 
         .stack append Float 
@@ -215,9 +215,9 @@ L238:   arraylength
 L239:   iconst_2 
 L240:   if_icmpge L278 
 L243:   fload_3 
-L244:   invokestatic Method ASMTick setTickServer (F)V 
+L244:   invokestatic Method asmtick/ASMTick setTickServer (F)V 
 L247:   fload_3 
-L248:   invokestatic Method ASMTick setTickClient (F)V 
+L248:   invokestatic Method asmtick/ASMTick setTickClient (F)V 
 L251:   aload_0 
 L252:   aload_1 
 L253:   new java/lang/StringBuilder 
@@ -228,7 +228,7 @@ L262:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)
 L265:   fload_3 
 L266:   invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L269:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L272:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L272:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L275:   goto L454 
 
         .stack same 
@@ -259,7 +259,7 @@ L319:   ifeq L353
 
         .stack same 
 L322:   fload_3 
-L323:   invokestatic Method ASMTick setTickClient (F)V 
+L323:   invokestatic Method asmtick/ASMTick setTickClient (F)V 
 L326:   aload_0 
 L327:   aload_1 
 L328:   new java/lang/StringBuilder 
@@ -270,7 +270,7 @@ L337:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)
 L340:   fload_3 
 L341:   invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L344:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L347:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L347:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L350:   goto L454 
 
         .stack same 
@@ -301,7 +301,7 @@ L394:   ifeq L428
 
         .stack same 
 L397:   fload_3 
-L398:   invokestatic Method ASMTick setTickServer (F)V 
+L398:   invokestatic Method asmtick/ASMTick setTickServer (F)V 
 L401:   aload_0 
 L402:   aload_1 
 L403:   new java/lang/StringBuilder 
@@ -312,7 +312,7 @@ L412:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)
 L415:   fload_3 
 L416:   invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L419:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L422:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L422:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 L425:   goto L454 
 
         .stack same 
@@ -328,10 +328,10 @@ L443:   iconst_1
 L444:   aaload 
 L445:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L448:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L451:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L451:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 
         .stack same 
-L454:   getstatic Field ASMTick isRemoteServer Z 
+L454:   getstatic Field asmtick/ASMTick isRemoteServer Z 
 L457:   ifeq L502 
 L460:   aload_0 
 L461:   aload_1 
@@ -340,60 +340,60 @@ L465:   dup
 L466:   invokespecial Method java/lang/StringBuilder <init> ()V 
 L469:   ldc '\xa7eServer tickrate = ' 
 L471:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
-L474:   getstatic Field ASMTick tickrateServer F 
+L474:   getstatic Field asmtick/ASMTick tickrateServer F 
 L477:   invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L480:   ldc '\n' 
 L482:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L485:   ldc '\xa7eClient tickrate = ' 
 L487:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
-L490:   getstatic Field ASMTick tickrateClient F 
+L490:   getstatic Field asmtick/ASMTick tickrateClient F 
 L493:   invokevirtual Method java/lang/StringBuilder append (F)Ljava/lang/StringBuilder; 
 L496:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
-L499:   invokevirtual Method CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
+L499:   invokevirtual Method asmtick/CommandTickrate notify (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)V 
 
         .stack chop 1 
 L502:   return 
 L503:   
         .linenumbertable 
-            L0 32 
-            L6 33 
-            L48 35 
-            L49 37 
-            L71 38 
-            L77 39 
-            L99 40 
-            L106 41 
-            L128 42 
-            L132 43 
-            L141 45 
-            L148 46 
-            L152 47 
-            L156 51 
-            L159 48 
-            L160 49 
-            L167 50 
-            L168 54 
-            L174 55 
-            L184 57 
-            L215 59 
-            L216 62 
-            L223 63 
-            L229 64 
-            L236 65 
-            L237 68 
-            L243 69 
-            L247 70 
-            L251 71 
-            L278 72 
-            L322 73 
-            L326 74 
-            L353 75 
-            L397 76 
-            L401 77 
-            L428 79 
-            L454 82 
-            L460 83 
-            L502 87 
+            L0 33 
+            L6 34 
+            L48 36 
+            L49 38 
+            L71 39 
+            L77 40 
+            L99 41 
+            L106 42 
+            L128 43 
+            L132 44 
+            L141 46 
+            L148 47 
+            L152 48 
+            L156 52 
+            L159 49 
+            L160 50 
+            L167 51 
+            L168 55 
+            L174 56 
+            L184 58 
+            L215 60 
+            L216 63 
+            L223 64 
+            L229 65 
+            L236 66 
+            L237 69 
+            L243 70 
+            L247 71 
+            L251 72 
+            L278 73 
+            L322 74 
+            L326 75 
+            L353 76 
+            L397 77 
+            L401 78 
+            L428 80 
+            L454 83 
+            L460 84 
+            L502 88 
         .end linenumbertable 
     .end code 
 .end method 
@@ -407,15 +407,15 @@ L5:     aload_0
 L6:     aload_2 
 L7:     iconst_0 
 L8:     anewarray java/lang/Object 
-L11:    invokestatic Method CommandTickrate notifyCommandListener (Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V 
+L11:    invokestatic Method asmtick/CommandTickrate notifyCommandListener (Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V 
 
         .stack same 
 L14:    return 
 L15:    
         .linenumbertable 
-            L0 91 
-            L4 92 
-            L14 93 
+            L0 92 
+            L4 93 
+            L14 94 
         .end linenumbertable 
     .end code 
 .end method 
@@ -434,9 +434,9 @@ L7:     ldc -1.0f
 L9:     freturn 
 L10:    
         .linenumbertable 
-            L0 98 
-            L6 99 
-            L7 100 
+            L0 99 
+            L6 100 
+            L7 101 
         .end linenumbertable 
     .end code 
 .end method 
