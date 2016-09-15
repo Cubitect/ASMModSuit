@@ -3,10 +3,10 @@ ASM Mod Suit by [Cubitect](https://github.com/Cubitect) [[YouTube]](https://www.
 
 There are two installable mods currently:
 
-| Mod              | MC versions | Description                                             |
-| ---------------- | ----------- | ------------------------------------------------------- |
-| ASMTick          | 1.7+        | Allows you to change the speed with which the game runs |
-| ASMVillageMarker | 1.8+        | Highlights villages in the world                        |
+| Mod              | MC versions | Description                                           |
+| ---------------- | ----------- | ----------------------------------------------------- |
+| ASMTick          | 1.7+        | Allows you to change the speed at which the game runs |
+| ASMVillageMarker | 1.8+        | Highlights villages in the world                      |
 
 ###Requirements
 Python 2.7
