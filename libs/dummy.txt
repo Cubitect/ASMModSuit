@@ -1,0 +1,2 @@
+The LWJGL library needs to be added to this directory in order to run 
+the ../Templates/compile.sh script.
