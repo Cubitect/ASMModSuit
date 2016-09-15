@@ -2,10 +2,11 @@
 ASM Mod Suit by [Cubitect](https://github.com/Cubitect) [[YouTube]](https://www.youtube.com/channel/UC1VmvHvATdD9ZkR1-rpoMeA) is a dynamic mod creation tool and installer. It assembles custom jar-mods for any newer Minecraft version, using the assembler and disassembler [Krakatau Bytecode Tools by Robert Grosse](https://github.com/Storyyeller/Krakatau). 
 
 There are two installable mods currently:
-Mod | MC versions | Description
------------------
-ASMTick | 1.7+ | Allows you to change the speed with which the game runs
-ASMVillageMarker | 1.8+ | Highlights villages in the world
+
+| Mod              | MC versions | Description                                             |
+| ---------------- | ----------- | ------------------------------------------------------- |
+| ASMTick          | 1.7+        | Allows you to change the speed with which the game runs |
+| ASMVillageMarker | 1.8+        | Highlights villages in the world                        |
 
 ###Requirements
 Python 2.7
