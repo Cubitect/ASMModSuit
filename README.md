@@ -13,7 +13,7 @@ Python 2.7
 ###Installation
 To install the any of the mods, simply download (or clone) this repository and run the `install.py` script, i.e.:
 
-`python2 install_mod.py`. 
+`python2 install.py`. 
 
 This will open a basic GUI interface, where you can browse for the minecraft version jar-file for which you want to install the mods. Then select the mods you want to install, and the name of the new modded copy. Finally press "install" and wait until you get the "Done" popup.
 
