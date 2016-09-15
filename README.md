@@ -12,7 +12,7 @@ There are two installable mods currently:
 Python 2.7
 
 ###Installation
-To install the any of the mods, simply download (or clone) this repository and run the `install.py` script, i.e.:
+To install any of the mods, simply download (or clone) this repository and run the `install.py` script, i.e.:
 
 `python2 install.py`. 
 
