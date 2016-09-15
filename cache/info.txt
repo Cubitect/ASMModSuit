@@ -1,0 +1,2 @@
+All the working files (e.g. disassembled and modified classes, ect.) are 
+managed in this directory.
