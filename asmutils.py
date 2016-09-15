@@ -75,6 +75,8 @@ class Util:
         if not isdir(instdir):
             os.makedirs(instdir)
         instzip = shutil.make_archive(instjar,format="zip",root_dir=self.classdir)
+        if isfile(instjar):
+			os.remove(instjar)
         os.rename(instzip,instjar)
 
         oldjson = join(self.jardir,self.vernam+'.json')
@@ -112,7 +114,7 @@ def copytree(root_src_dir, root_dst_dir):
             dst_file = os.path.join(dst_dir, file_)
             if os.path.exists(dst_file):
                 os.remove(dst_file)
-            shutil.copy(src_file, dst_dir)
+            shutil.copy(src_file, dst_file)
 
 def findOps(lines,start,oplist):
     for n, l in enumerate(lines[start:]):

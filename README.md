@@ -16,7 +16,7 @@ To install any of the mods, simply download (or clone) this repository and run t
 
 `python2 install.py`. 
 
-This will open a basic GUI interface, where you can browse for the minecraft version jar-file for which you want to install the mods. Then select the mods you want to install, and the name of the new modded copy. Finally press "install" and wait until you get the "Done" popup.
+This will open a basic GUI interface, where you can browse for the minecraft-version jar-file for which you want to install the mods. Then select the mods you want to install, and the name of the new modded copy. Finally press "install" and wait until you get the "Done" popup.
 
 
 #ASMTick

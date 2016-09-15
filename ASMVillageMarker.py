@@ -150,7 +150,7 @@ def create_mod(util):
     if not isdir(join(util.modjdir,'villagemarker')):
         os.makedirs(join(util.modjdir,'villagemarker'))
 
-    modClass = join('villagemarker','ASMVillageMarker')
+    modClass = 'villagemarker/ASMVillageMarker'
     print 'Setting up '+modClass+'.class...'
     mModClass = join(util.modjdir,modClass+'.j')
     tModClass = join(util.temdir,modClass+'.j')
@@ -183,7 +183,7 @@ def create_mod(util):
 
                 fout.write(line)
 
-    renderShapes = join('villagemarker','RenderShapes')
+    renderShapes = 'villagemarker/RenderShapes'
     print 'Setting up '+renderShapes+'.class...'
     mRenderShapes = join(util.modjdir,renderShapes+'.j')
     tRenderShapes = join(util.temdir,renderShapes+'.j')

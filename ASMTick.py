@@ -162,7 +162,7 @@ def create_mod(util):
     if not isdir(join(util.modjdir,'asmtick')):
         os.makedirs(join(util.modjdir,'asmtick'))
 
-    modClass = join('asmtick','ASMTick')
+    modClass = 'asmtick/ASMTick'
     print 'Setting up '+modClass+'.class...'
     mModClass = join(util.modjdir,modClass+'.j')
     tModClass = join(util.temdir,modClass+'.j')
@@ -187,7 +187,7 @@ def create_mod(util):
             fout.write(''.join(lines))
 
     print 'Injecting Tickrate command...'
-    cmdTickrate = join('asmtick','CommandTickrate')
+    cmdTickrate = 'asmtick/CommandTickrate'
     mCommandTickrate = join(util.modjdir,cmdTickrate+'.j')
     tCommandTickrate = join(util.temdir,cmdTickrate+'.j')
     with open(mCommandTickrate, 'w') as fout:
