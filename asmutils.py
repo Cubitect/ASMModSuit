@@ -126,6 +126,8 @@ class Util:
         if not isdir(instdir):
             os.makedirs(instdir)
         instzip = shutil.make_archive(instjar,format="zip",root_dir=self.classdir)
+        if isfile(instjar):
+			os.remove(instjar)
         os.rename(instzip,instjar)
 
         oldjson = join(self.jardir,self.vernam+'.json')
