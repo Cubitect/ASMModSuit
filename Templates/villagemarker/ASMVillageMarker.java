@@ -9,18 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.Village;
 import net.minecraft.village.VillageDoorInfo;
+import asmrender.ASMRender;
 
-public class ASMVillageMarker 
+public class ASMVillageMarker extends ASMRender
 {
     public static final String author      = "Cubitect";
     public static final String name        = "ASMVillageMarker";
     public static final File configFile = new File(name+".conf");
-    
-    public static Minecraft minecraft = Minecraft.getMinecraft();
     
     public static boolean doDepthCheck = true;
     public static boolean drawSphere = true;
@@ -31,22 +29,86 @@ public class ASMVillageMarker
     public static float doorLineWidth = 2.0f;
     public static float sphereDotSize = 3.0f;
     public static float boxEdgeWidth = 2.0f;
-    public static float boxEdgeExpansion =  0.002f;
-    public static float boxWallExpansion = -0.002f;
+    public static float boxEdgeExpansion =  0.006f;
+    public static float boxWallExpansion = -0.006f;
     public static float wallAlpha = 0.12f;
     public static Color cols[] = new Color[]{Color.CYAN, Color.MAGENTA, Color.YELLOW, Color.BLUE, Color.GREEN, Color.RED};
     
     public static final ASMVillageMarker INSTANCE = new ASMVillageMarker();
     
-    public ASMVillageMarker()
+	public static void render(double playerX, double playerY, double playerZ)
+	{
+        if(minecraft.isSingleplayer()) 
+        {
+        	setup(doDepthCheck);
+	    	translate((float)playerX, (float)playerY, (float)playerZ);
+	    	render();
+	    	ASMRender.restore();
+        }
+	}
+	
+    public static void render()
     {
-    	init();
+        ArrayList<Village> villageList = new ArrayList();
+        villageList.addAll(
+        		minecraft
+        		.getIntegratedServer()
+        		.worldServerForDimension(minecraft.thePlayer.dimension)
+        		.getVillageCollection()
+        		.getVillageList());
+        
+        int c = 0;
+        for(Village village : villageList)
+        {
+            BlockPos center = village.getCenter();
+            float centerX = center.getX();
+            float centerY = center.getY();
+            float centerZ = center.getZ();
+            float radius = village.getVillageRadius();
+            ArrayList<VillageDoorInfo> doors = new ArrayList();
+            doors.addAll(village.getVillageDoorInfoList());
+            
+            Color vcol = cols[(c++) % cols.length];
+            
+            if(drawSphere)
+            ASMRender.drawBufferedSphere(
+            		centerX, centerY, centerZ, 
+            		radius, vcol, sphereDotSize);
+            
+            if(drawDoorLines)
+            for(VillageDoorInfo doorInfo : doors)
+            {
+            	BlockPos doorPos = doorInfo.getDoorBlockPos();
+            	ASMRender.drawLine(
+            			centerX, centerY, centerZ,
+            			doorPos.getX(), doorPos.getY(), doorPos.getZ(), 
+            			vcol, doorLineWidth);
+            }
+            
+            if(drawBoxEdge)
+            ASMRender.drawBox(
+            		centerX-(8F+boxEdgeExpansion), centerY-(3F+boxEdgeExpansion), centerZ-(8F+boxEdgeExpansion),
+            		centerX+(8F+boxEdgeExpansion), centerY+(3F+boxEdgeExpansion), centerZ+(8F+boxEdgeExpansion), 
+            		vcol, boxEdgeWidth);
+            
+            if(drawBoxWalls)
+            ASMRender.drawBoxWalls(
+            		centerX-(8F+boxWallExpansion), centerY-(3F+boxWallExpansion), centerZ-(8F+boxWallExpansion),
+            		centerX+(8F+boxWallExpansion), centerY+(3F+boxWallExpansion), centerZ+(8F+boxWallExpansion), 
+            		vcol, wallAlpha);
+        }
     }
+    
     
     public static void log(String msg)
     {
         String formattedDate = new SimpleDateFormat("HH:mm:ss").format(new Date());
         System.out.println("[" + formattedDate + "] [" + name + "] " + msg);
+    }
+    
+    public ASMVillageMarker()
+    {
+    	init();
     }
     
 	public static void init()
@@ -56,12 +118,12 @@ public class ASMVillageMarker
     	else
     		readOptions();
     	
-    	RenderShapes.updateSphereBuf(sphereSegments);
+    	ASMRender.updateSphereBuf(sphereSegments);
     }
     
 	private static String col2hex(Color c)
 	{
-		return Integer.toHexString(c.getRGB() & 0xffffff);
+		return '#'+Integer.toHexString((c.getRGB() & 0xffffff) | 0x1000000).substring(1);
 	}
 	
 	private static Color hex2col(String str)
@@ -181,67 +243,5 @@ public class ASMVillageMarker
 			log("Couldn't read options file: "+e);
 		}
     }
-    
-    public static void renderVillageMarker(double x, double y, double z) 
-    {
-        if(minecraft.isSingleplayer()) 
-        {
-        	RenderShapes.setup(doDepthCheck);
-        	RenderShapes.translate((float)x, (float)y, (float)z);
-        	markVillages();
-        	RenderShapes.restore();
-        }
-    }
-    
-    public static void markVillages()
-    {
-        ArrayList<Village> villageList = new ArrayList();
-        villageList.addAll(
-        		minecraft
-        		.getIntegratedServer()
-        		.worldServerForDimension(minecraft.thePlayer.dimension)
-        		.getVillageCollection()
-        		.getVillageList());
-        
-        int c = 0;
-        for(Village village : villageList)
-        {
-            BlockPos center = village.getCenter();
-            float centerX = center.getX();
-            float centerY = center.getY();
-            float centerZ = center.getZ();
-            float radius = village.getVillageRadius();
-            ArrayList<VillageDoorInfo> doors = new ArrayList();
-            doors.addAll(village.getVillageDoorInfoList());
-            
-            Color vcol = cols[(c++) % cols.length];
-            
-            if(drawSphere)
-            RenderShapes.drawBufferedSphere(
-            		centerX, centerY, centerZ, 
-            		radius, vcol, sphereDotSize);
-            
-            if(drawDoorLines)
-            for(VillageDoorInfo doorInfo : doors)
-            {
-            	BlockPos doorPos = doorInfo.getDoorBlockPos();
-            	RenderShapes.drawLine(
-            			centerX, centerY, centerZ,
-            			doorPos.getX(), doorPos.getY(), doorPos.getZ(), 
-            			vcol, doorLineWidth);
-            }
-            
-            if(drawBoxEdge)
-            RenderShapes.drawBox(
-            		centerX-(8F+boxEdgeExpansion), centerY-(3F+boxEdgeExpansion), centerZ-(8F+boxEdgeExpansion),
-            		centerX+(8F+boxEdgeExpansion), centerY+(3F+boxEdgeExpansion), centerZ+(8F+boxEdgeExpansion), 
-            		vcol, boxEdgeWidth);
-            
-            if(drawBoxWalls)
-            RenderShapes.drawBoxWalls(
-            		centerX-(8F+boxWallExpansion), centerY-(3F+boxWallExpansion), centerZ-(8F+boxWallExpansion),
-            		centerX+(8F+boxWallExpansion), centerY+(3F+boxWallExpansion), centerZ+(8F+boxWallExpansion), 
-            		vcol, wallAlpha);
-        }
-    }        	
+      	
 }

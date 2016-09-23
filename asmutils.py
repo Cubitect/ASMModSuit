@@ -33,6 +33,10 @@ class Util:
         self.disasmpy = self.python2+' '+join(self.curdir,'Krakatau-master','disassemble.py')
         self.asmpy = self.python2+' '+join(self.curdir,'Krakatau-master','assemble.py')
 
+        self.maps = dict()
+        self.mtds = dict()
+        self.flds = dict()
+
     def setup(self):
         print 'Preparing directory tree for '+self.side+'...'
 
@@ -51,7 +55,26 @@ class Util:
         if self.side == 'client' and isdir(metadir):
             shutil.rmtree(metadir)
 
-    def disasm(self,className):
+    def setmap(self,key,mapping):
+        self.maps[key] = mapping
+        print key + ' -> ' + mapping
+
+    def getmap(self,key):
+        try:
+            return self.maps[key]
+        except:
+            print '404: '+key
+            return None
+
+    def expand(self,key):
+        try:
+            className = key.split('.')[0]
+            return self.getmap(className) + ' ' + self.getmap(key) + ' '
+        except:
+            return None
+
+    def map2j(self,className):
+        className = self.getmap(className)
         outf = join(self.modjdir,className)+'.j'
         if isfile(outf):
             return outf
@@ -61,6 +84,34 @@ class Util:
         print 'Disassembling ' + className + '...'
         os.system(self.disasmpy+' -out '+self.asmdir+' '+join(self.classdir,className)+'.class > '+os.devnull)
         return outf
+
+    def getjfile(self,className):
+        outf = join(self.modjdir,className)+'.j'
+        if isfile(outf):
+            return outf
+        outf = join(self.asmdir,className)+'.j'
+        if isfile(outf):
+            return outf
+        print 'Disassembling ' + className + '...'
+        os.system(self.disasmpy+' -out '+self.asmdir+' '+join(self.classdir,className)+'.class > '+os.devnull)
+        return outf
+
+    def readj(self,className):
+        with open(self.map2j(className),'r') as fin:
+            return fin.readlines()
+
+    def readt(self,className):
+        t = join(self.temdir,self.getmap(className)+'.j')
+        with open(t,'r') as fin:
+            return fin.readlines()
+
+    def write2mod(self,className,lines):
+        m = join(self.modjdir,self.getmap(className)+'.j')
+        b = dirname(m)
+        if not isdir(b):
+            os.makedirs(b)
+        with open(m,'w') as fout:
+            fout.write(''.join(lines))
 
     def install(self,instver):
         # create the mod
@@ -75,8 +126,6 @@ class Util:
         if not isdir(instdir):
             os.makedirs(instdir)
         instzip = shutil.make_archive(instjar,format="zip",root_dir=self.classdir)
-        if isfile(instjar):
-			os.remove(instjar)
         os.rename(instzip,instjar)
 
         oldjson = join(self.jardir,self.vernam+'.json')
@@ -114,7 +163,7 @@ def copytree(root_src_dir, root_dst_dir):
             dst_file = os.path.join(dst_dir, file_)
             if os.path.exists(dst_file):
                 os.remove(dst_file)
-            shutil.copy(src_file, dst_file)
+            shutil.copy(src_file, dst_dir)
 
 def findOps(lines,start,oplist):
     for n, l in enumerate(lines[start:]):
@@ -136,6 +185,9 @@ def endw(line,fromEnd):
 
 def lnum(line):
     return line.split(' ',1)[0]
+
+def rmlnum(line):
+    return line.split(' ',1)[1]
 
 def betweenr(s,pre,post):
     try:

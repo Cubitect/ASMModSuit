@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.Timer;
+
 public class ASMTick
 {
     private static final String author      = "Cubitect";
@@ -43,16 +46,35 @@ public class ASMTick
     }
     
     
-    public static void setTickClient(float tickspeed)
+    public static void setTickClient(float rate)
     {
-        float f = 0;
-        tickrateClient = tickspeed;
-        // Minecraft set-timer bytecode is dynamically inserted here
+        tickrateClient = rate;
+        Minecraft minecraft = Minecraft.getMinecraft();
+        
+        float elapsedPartialTicks = minecraft.timer.elapsedPartialTicks;
+        int elapsedTicks = minecraft.timer.elapsedTicks;
+        float renderPartialTicks = minecraft.timer.renderPartialTicks;
+        
+        minecraft.timer = new Timer(rate);
+        
+        minecraft.timer.elapsedPartialTicks = elapsedPartialTicks;
+        minecraft.timer.elapsedTicks = elapsedTicks;
+        minecraft.timer.renderPartialTicks = renderPartialTicks;
     }
     
     public static long serverSleep(long ms) 
     {
         long j = 0;
+        
+        if(sleepLock)
+        {
+			try {
+                Thread.sleep(ms2Tick);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+			return 0;
+		}
         
         do {
             try {

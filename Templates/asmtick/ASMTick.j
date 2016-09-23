@@ -26,7 +26,7 @@ L1:     invokespecial Method java/lang/Object <init> ()V
 L4:     return 
 L5:     
         .linenumbertable 
-            L0 8 
+            L0 11 
         .end linenumbertable 
     .end code 
 .end method 
@@ -59,28 +59,65 @@ L38:    putstatic Field asmtick/ASMTick ms2Tick J
 L41:    return 
 L42:    
         .linenumbertable 
-            L0 36 
-            L4 37 
-            L14 38 
-            L22 39 
-            L31 41 
-            L41 43 
+            L0 39 
+            L4 40 
+            L14 41 
+            L22 42 
+            L31 44 
+            L41 46 
         .end linenumbertable 
     .end code 
 .end method 
 
 .method public static setTickClient : (F)V 
-    .code stack 1 locals 2 
-L0:     fconst_0 
-L1:     fstore_1 
-L2:     fload_0 
-L3:     putstatic Field asmtick/ASMTick tickrateClient F 
-L6:     return 
-L7:     
+    .code stack 4 locals 5 
+L0:     fload_0 
+L1:     putstatic Field asmtick/ASMTick tickrateClient F 
+L4:     invokestatic Method net/minecraft/client/Minecraft getMinecraft ()Lnet/minecraft/client/Minecraft; 
+L7:     astore_1 
+L8:     aload_1 
+L9:     getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L12:    getfield Field net/minecraft/util/Timer elapsedPartialTicks F 
+L15:    fstore_2 
+L16:    aload_1 
+L17:    getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L20:    getfield Field net/minecraft/util/Timer elapsedTicks I 
+L23:    istore_3 
+L24:    aload_1 
+L25:    getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L28:    getfield Field net/minecraft/util/Timer renderPartialTicks F 
+L31:    fstore 4 
+L33:    aload_1 
+L34:    new net/minecraft/util/Timer 
+L37:    dup 
+L38:    fload_0 
+L39:    invokespecial Method net/minecraft/util/Timer <init> (F)V 
+L42:    putfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L45:    aload_1 
+L46:    getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L49:    fload_2 
+L50:    putfield Field net/minecraft/util/Timer elapsedPartialTicks F 
+L53:    aload_1 
+L54:    getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L57:    iload_3 
+L58:    putfield Field net/minecraft/util/Timer elapsedTicks I 
+L61:    aload_1 
+L62:    getfield Field net/minecraft/client/Minecraft timer Lnet/minecraft/util/Timer; 
+L65:    fload 4 
+L67:    putfield Field net/minecraft/util/Timer renderPartialTicks F 
+L70:    return 
+L71:    
         .linenumbertable 
-            L0 48 
-            L2 49 
-            L6 51 
+            L0 51 
+            L4 52 
+            L8 54 
+            L16 55 
+            L24 56 
+            L33 58 
+            L45 60 
+            L53 61 
+            L61 62 
+            L70 63 
         .end linenumbertable 
     .end code 
 .end method 
@@ -89,70 +126,94 @@ L7:
     .code stack 6 locals 5 
 L0:     lconst_0 
 L1:     lstore_2 
-        .catch java/lang/InterruptedException from L2 to L6 using L9 
+L2:     getstatic Field asmtick/ASMTick sleepLock Z 
+L5:     ifeq L26 
+        .catch java/lang/InterruptedException from L8 to L14 using L17 
+L8:     getstatic Field asmtick/ASMTick ms2Tick J 
+L11:    invokestatic Method java/lang/Thread sleep (J)V 
+L14:    goto L24 
 
-        .stack append Long 
-L2:     lconst_1 
-L3:     invokestatic Method java/lang/Thread sleep (J)V 
-L6:     goto L16 
+        .stack full 
+            locals Long Long 
+            stack Object java/lang/InterruptedException 
+        .end stack 
+L17:    astore 4 
+L19:    aload 4 
+L21:    invokevirtual Method java/lang/InterruptedException printStackTrace ()V 
+
+        .stack same 
+L24:    lconst_0 
+L25:    lreturn 
+        .catch java/lang/InterruptedException from L26 to L30 using L33 
+
+        .stack same 
+L26:    lconst_1 
+L27:    invokestatic Method java/lang/Thread sleep (J)V 
+L30:    goto L40 
 
         .stack stack_1 Object java/lang/InterruptedException 
-L9:     astore 4 
-L11:    aload 4 
-L13:    invokevirtual Method java/lang/InterruptedException printStackTrace ()V 
+L33:    astore 4 
+L35:    aload 4 
+L37:    invokevirtual Method java/lang/InterruptedException printStackTrace ()V 
 
         .stack same 
-L16:    lload_2 
-L17:    lconst_1 
-L18:    ladd 
-L19:    lstore_2 
-L20:    lload_2 
-L21:    getstatic Field asmtick/ASMTick ms2Tick J 
-L24:    lload_0 
-L25:    lsub 
-L26:    lcmp 
-L27:    ifge L44 
-L30:    lload_2 
-L31:    getstatic Field asmtick/ASMTick maxSleep J 
-L34:    lcmp 
-L35:    ifgt L44 
-L38:    getstatic Field asmtick/ASMTick interruptTick Z 
-L41:    ifeq L2 
+L40:    lload_2 
+L41:    lconst_1 
+L42:    ladd 
+L43:    lstore_2 
+L44:    lload_2 
+L45:    getstatic Field asmtick/ASMTick ms2Tick J 
+L48:    lload_0 
+L49:    lsub 
+L50:    lcmp 
+L51:    ifge L68 
+L54:    lload_2 
+L55:    getstatic Field asmtick/ASMTick maxSleep J 
+L58:    lcmp 
+L59:    ifgt L68 
+L62:    getstatic Field asmtick/ASMTick interruptTick Z 
+L65:    ifeq L26 
 
         .stack same 
-L44:    getstatic Field asmtick/ASMTick interruptTick Z 
-L47:    ifeq L58 
-L50:    ldc 'Server sleep interrupted.' 
-L52:    invokestatic Method asmtick/ASMTick log (Ljava/lang/String;)V 
-L55:    goto L76 
+L68:    getstatic Field asmtick/ASMTick interruptTick Z 
+L71:    ifeq L82 
+L74:    ldc 'Server sleep interrupted.' 
+L76:    invokestatic Method asmtick/ASMTick log (Ljava/lang/String;)V 
+L79:    goto L100 
 
         .stack same 
-L58:    lload_2 
-L59:    getstatic Field asmtick/ASMTick maxSleep J 
-L62:    lcmp 
-L63:    iflt L76 
-L66:    getstatic Field asmtick/ASMTick sleepLock Z 
-L69:    ifne L76 
-L72:    iconst_1 
-L73:    putstatic Field asmtick/ASMTick interruptTick Z 
+L82:    lload_2 
+L83:    getstatic Field asmtick/ASMTick maxSleep J 
+L86:    lcmp 
+L87:    iflt L100 
+L90:    getstatic Field asmtick/ASMTick sleepLock Z 
+L93:    ifne L100 
+L96:    iconst_1 
+L97:    putstatic Field asmtick/ASMTick interruptTick Z 
 
         .stack same 
-L76:    lload_2 
-L77:    lreturn 
-L78:    
+L100:   lload_2 
+L101:   lreturn 
+L102:   
         .linenumbertable 
-            L0 55 
-            L2 59 
-            L6 62 
-            L9 60 
-            L11 61 
-            L16 63 
-            L20 64 
-            L44 66 
-            L50 67 
-            L58 69 
-            L72 70 
-            L76 72 
+            L0 67 
+            L2 69 
+            L8 72 
+            L14 75 
+            L17 73 
+            L19 74 
+            L24 76 
+            L26 81 
+            L30 84 
+            L33 82 
+            L35 83 
+            L40 85 
+            L44 86 
+            L68 88 
+            L74 89 
+            L82 91 
+            L96 92 
+            L100 94 
         .end linenumbertable 
     .end code 
 .end method 
@@ -164,8 +225,8 @@ L1:     putstatic Field asmtick/ASMTick interruptTick Z
 L4:     return 
 L5:     
         .linenumbertable 
-            L0 77 
-            L4 78 
+            L0 99 
+            L4 100 
         .end linenumbertable 
     .end code 
 .end method 
@@ -221,18 +282,18 @@ L74:    invokestatic Method asmtick/ASMTick setTickClient (F)V
 L77:    return 
 L78:    
         .linenumbertable 
-            L0 82 
-            L6 83 
-            L7 84 
-            L16 86 
-            L22 87 
-            L28 88 
-            L33 89 
-            L41 90 
-            L51 91 
-            L56 92 
-            L65 93 
-            L77 95 
+            L0 104 
+            L6 105 
+            L7 106 
+            L16 108 
+            L22 109 
+            L28 110 
+            L33 111 
+            L41 112 
+            L51 113 
+            L56 114 
+            L65 115 
+            L77 117 
         .end linenumbertable 
     .end code 
 .end method 
@@ -269,9 +330,9 @@ L61:    invokevirtual Method java/io/PrintStream println (Ljava/lang/String;)V
 L64:    return 
 L65:    
         .linenumbertable 
-            L0 100 
-            L20 101 
-            L64 102 
+            L0 122 
+            L20 123 
+            L64 124 
         .end linenumbertable 
     .end code 
 .end method 
@@ -307,15 +368,15 @@ L53:    putstatic Field asmtick/ASMTick doOnlyQueue Z
 L56:    return 
 L57:    
         .linenumbertable 
-            L0 19 
-            L4 21 
-            L8 22 
-            L26 24 
-            L31 25 
-            L36 26 
-            L42 27 
-            L48 29 
-            L52 32 
+            L0 22 
+            L4 24 
+            L8 25 
+            L26 27 
+            L31 28 
+            L36 29 
+            L42 30 
+            L48 32 
+            L52 35 
         .end linenumbertable 
     .end code 
 .end method 
