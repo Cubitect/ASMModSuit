@@ -22,20 +22,13 @@ class Util:
         self.classdir = join(self.curdir, 'cache', self.vernam, 'classes')
         self.temdir = join(self.curdir, 'Templates')
 
-        try:
-            fdevnull = open(os.devnull)
-            subprocess.Popen(['python2','--version'], stdout=fdevnull, stderr=fdevnull).communicate()
-            self.python2 = 'python2'
-        except OSError as e:
-            if e.errno == os.errno.ENOENT:
-                self.python2 = 'python'
+        self.python2 = sys.executable
+        print 'Python executable is: ' + self.python2
 
         self.disasmpy = self.python2+' '+join(self.curdir,'Krakatau-master','disassemble.py')
         self.asmpy = self.python2+' '+join(self.curdir,'Krakatau-master','assemble.py')
 
         self.maps = dict()
-        self.mtds = dict()
-        self.flds = dict()
 
     def setup(self):
         print 'Preparing directory tree for '+self.side+'...'
@@ -43,11 +36,17 @@ class Util:
         if isdir(self.modjdir):
             shutil.rmtree(self.modjdir)
         os.makedirs(self.modjdir)
+
         if isdir(self.modcdir):
             shutil.rmtree(self.modcdir)
         os.makedirs(self.modcdir)
+
+        if not isdir(self.asmdir):
+            os.makedirs(self.asmdir)
+
         if not isdir(self.classdir):
             os.makedirs(self.classdir)
+
         zipref = zipfile.ZipFile(self.jarpath,'r')
         zipref.extractall(self.classdir)
         zipref.close()
@@ -126,8 +125,6 @@ class Util:
         if not isdir(instdir):
             os.makedirs(instdir)
         instzip = shutil.make_archive(instjar,format="zip",root_dir=self.classdir)
-        if isfile(instjar):
-			os.remove(instjar)
         os.rename(instzip,instjar)
 
         oldjson = join(self.jardir,self.vernam+'.json')
