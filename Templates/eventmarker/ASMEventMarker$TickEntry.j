@@ -41,13 +41,13 @@ L50:    putfield Field eventmarker/ASMEventMarker$TickEntry time J
 L53:    return 
 L54:    
         .linenumbertable 
-            L0 121 
-            L4 122 
-            L15 123 
-            L26 124 
-            L37 125 
-            L45 126 
-            L53 127 
+            L0 128 
+            L4 129 
+            L15 130 
+            L26 131 
+            L37 132 
+            L45 133 
+            L53 134 
         .end linenumbertable 
     .end code 
 .end method 
@@ -433,40 +433,40 @@ L818:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/Str
 L821:   return 
 L822:   
         .linenumbertable 
-            L0 130 
-            L4 131 
-            L15 132 
-            L26 133 
-            L37 134 
-            L48 135 
-            L60 136 
-            L72 138 
-            L103 139 
-            L134 141 
-            L158 143 
-            L196 144 
-            L225 145 
-            L254 146 
-            L283 147 
-            L312 148 
-            L341 149 
-            L367 152 
-            L396 155 
-            L408 157 
-            L440 158 
-            L469 159 
-            L498 160 
-            L524 163 
-            L568 164 
-            L597 165 
-            L626 166 
-            L655 167 
-            L684 168 
-            L713 169 
-            L742 170 
-            L771 174 
-            L795 176 
-            L821 178 
+            L0 137 
+            L4 138 
+            L15 139 
+            L26 140 
+            L37 141 
+            L48 142 
+            L60 143 
+            L72 145 
+            L103 146 
+            L134 148 
+            L158 150 
+            L196 151 
+            L225 152 
+            L254 153 
+            L283 154 
+            L312 155 
+            L341 156 
+            L367 159 
+            L396 162 
+            L408 164 
+            L440 165 
+            L469 166 
+            L498 167 
+            L524 170 
+            L568 171 
+            L597 172 
+            L626 173 
+            L655 174 
+            L684 175 
+            L713 176 
+            L742 177 
+            L771 181 
+            L795 183 
+            L821 185 
         .end linenumbertable 
     .end code 
 .end method 
@@ -498,7 +498,7 @@ L35:    invokestatic Method java/lang/Long valueOf (J)Ljava/lang/Long;
 L38:    areturn 
 L39:    
         .linenumbertable 
-            L0 182 
+            L0 189 
         .end linenumbertable 
     .end code 
 .end method 

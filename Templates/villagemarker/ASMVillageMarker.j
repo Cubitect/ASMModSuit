@@ -20,7 +20,8 @@
 .field public static final INSTANCE Lvillagemarker/ASMVillageMarker; 
 
 .method public static render : (DDD)V 
-    .code stack 4 locals 6 
+    .code stack 4 locals 7 
+        .catch java/lang/Exception from L0 to L31 using L34 
 L0:     getstatic Field villagemarker/ASMVillageMarker minecraft Lnet/minecraft/client/Minecraft; 
 L3:     invokevirtual Method net/minecraft/client/Minecraft isSingleplayer ()Z 
 L6:     ifeq L31 
@@ -37,15 +38,28 @@ L25:    invokestatic Method villagemarker/ASMVillageMarker render ()V
 L28:    invokestatic Method asmrender/ASMRender restore ()V 
 
         .stack same 
-L31:    return 
-L32:    
+L31:    goto L47 
+
+        .stack stack_1 Object java/lang/Exception 
+L34:    astore 6 
+L36:    getstatic Field java/lang/System out Ljava/io/PrintStream; 
+L39:    aload 6 
+L41:    invokevirtual Method java/lang/Exception getMessage ()Ljava/lang/String; 
+L44:    invokevirtual Method java/io/PrintStream println (Ljava/lang/String;)V 
+
+        .stack same 
+L47:    return 
+L48:    
         .linenumbertable 
-            L0 41 
-            L9 43 
-            L15 44 
-            L25 45 
-            L28 46 
-            L31 48 
+            L0 43 
+            L9 45 
+            L15 46 
+            L25 47 
+            L28 48 
+            L31 54 
+            L34 51 
+            L36 53 
+            L47 55 
         .end linenumbertable 
     .end code 
 .end method 
@@ -249,38 +263,38 @@ L369:   goto L44
 L372:   return 
 L373:   
         .linenumbertable 
-            L0 52 
-            L8 53 
-            L12 55 
-            L24 56 
-            L27 57 
-            L30 58 
-            L33 53 
-            L37 60 
-            L39 61 
-            L63 63 
-            L69 64 
-            L77 65 
-            L85 66 
-            L93 67 
-            L100 68 
-            L109 69 
-            L119 71 
-            L134 73 
-            L140 74 
-            L156 78 
-            L162 79 
-            L191 81 
-            L198 82 
-            L206 84 
-            L227 82 
-            L230 86 
-            L233 88 
-            L239 89 
-            L301 94 
-            L307 95 
-            L369 99 
-            L372 100 
+            L0 59 
+            L8 60 
+            L12 62 
+            L24 63 
+            L27 64 
+            L30 65 
+            L33 60 
+            L37 67 
+            L39 68 
+            L63 70 
+            L69 71 
+            L77 72 
+            L85 73 
+            L93 74 
+            L100 75 
+            L109 76 
+            L119 78 
+            L134 80 
+            L140 81 
+            L156 85 
+            L162 86 
+            L191 88 
+            L198 89 
+            L206 91 
+            L227 89 
+            L230 93 
+            L233 95 
+            L239 96 
+            L301 101 
+            L307 102 
+            L369 106 
+            L372 107 
         .end linenumbertable 
     .end code 
 .end method 
@@ -317,9 +331,9 @@ L61:    invokevirtual Method java/io/PrintStream println (Ljava/lang/String;)V
 L64:    return 
 L65:    
         .linenumbertable 
-            L0 105 
-            L20 106 
-            L64 107 
+            L0 112 
+            L20 113 
+            L64 114 
         .end linenumbertable 
     .end code 
 .end method 
@@ -332,9 +346,9 @@ L4:     invokestatic Method villagemarker/ASMVillageMarker init ()V
 L7:     return 
 L8:     
         .linenumbertable 
-            L0 110 
-            L4 111 
-            L7 112 
+            L0 117 
+            L4 118 
+            L7 119 
         .end linenumbertable 
     .end code 
 .end method 
@@ -356,11 +370,11 @@ L21:    invokestatic Method asmrender/ASMRender updateSphereBuf (I)V
 L24:    return 
 L25:    
         .linenumbertable 
-            L0 116 
-            L9 117 
-            L15 119 
-            L18 121 
-            L24 122 
+            L0 123 
+            L9 124 
+            L15 126 
+            L18 128 
+            L24 129 
         .end linenumbertable 
     .end code 
 .end method 
@@ -386,7 +400,7 @@ L32:    invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/Strin
 L35:    areturn 
 L36:    
         .linenumbertable 
-            L0 126 
+            L0 133 
         .end linenumbertable 
     .end code 
 .end method 
@@ -423,11 +437,11 @@ L45:    invokestatic Method java/awt/Color decode (Ljava/lang/String;)Ljava/awt/
 L48:    areturn 
 L49:    
         .linenumbertable 
-            L0 131 
-            L9 132 
-            L15 133 
-            L24 134 
-            L44 135 
+            L0 138 
+            L9 139 
+            L15 140 
+            L24 141 
+            L44 142 
         .end linenumbertable 
     .end code 
 .end method 
@@ -627,29 +641,29 @@ L427:   invokestatic Method villagemarker/ASMVillageMarker log (Ljava/lang/Strin
 L430:   return 
 L431:   
         .linenumbertable 
-            L0 142 
-            L18 143 
-            L43 144 
-            L68 145 
-            L93 146 
-            L118 147 
-            L143 148 
-            L168 149 
-            L193 150 
-            L218 151 
-            L243 152 
-            L268 153 
-            L293 154 
-            L318 156 
-            L348 157 
-            L358 158 
-            L388 157 
-            L394 159 
-            L400 161 
-            L404 166 
-            L407 163 
-            L408 165 
-            L430 167 
+            L0 149 
+            L18 150 
+            L43 151 
+            L68 152 
+            L93 153 
+            L118 154 
+            L143 155 
+            L168 156 
+            L193 157 
+            L218 158 
+            L243 159 
+            L268 160 
+            L293 161 
+            L318 163 
+            L348 164 
+            L358 165 
+            L388 164 
+            L394 166 
+            L400 168 
+            L404 173 
+            L407 170 
+            L408 172 
+            L430 174 
         .end linenumbertable 
     .end code 
 .end method 
@@ -961,56 +975,56 @@ L489:   invokestatic Method villagemarker/ASMVillageMarker log (Ljava/lang/Strin
 L492:   return 
 L493:   
         .linenumbertable 
-            L0 173 
-            L18 174 
-            L20 175 
-            L29 179 
-            L36 180 
-            L53 181 
-            L56 183 
-            L67 184 
-            L79 186 
-            L90 187 
-            L102 189 
-            L113 190 
-            L125 192 
-            L136 193 
-            L148 195 
-            L159 196 
-            L171 198 
-            L182 199 
-            L194 201 
-            L205 202 
-            L217 204 
-            L228 205 
-            L240 207 
-            L251 208 
-            L263 210 
-            L274 211 
-            L286 213 
-            L297 214 
-            L309 216 
-            L320 217 
-            L332 219 
-            L343 221 
-            L350 222 
-            L357 223 
-            L366 224 
-            L373 225 
-            L383 226 
-            L395 225 
-            L401 227 
-            L406 228 
-            L409 231 
-            L433 237 
-            L436 234 
-            L437 236 
-            L459 237 
-            L462 239 
-            L466 244 
-            L469 241 
-            L470 243 
-            L492 245 
+            L0 180 
+            L18 181 
+            L20 182 
+            L29 186 
+            L36 187 
+            L53 188 
+            L56 190 
+            L67 191 
+            L79 193 
+            L90 194 
+            L102 196 
+            L113 197 
+            L125 199 
+            L136 200 
+            L148 202 
+            L159 203 
+            L171 205 
+            L182 206 
+            L194 208 
+            L205 209 
+            L217 211 
+            L228 212 
+            L240 214 
+            L251 215 
+            L263 217 
+            L274 218 
+            L286 220 
+            L297 221 
+            L309 223 
+            L320 224 
+            L332 226 
+            L343 228 
+            L350 229 
+            L357 230 
+            L366 231 
+            L373 232 
+            L383 233 
+            L395 232 
+            L401 234 
+            L406 235 
+            L409 238 
+            L433 244 
+            L436 241 
+            L437 243 
+            L459 244 
+            L462 246 
+            L466 251 
+            L469 248 
+            L470 250 
+            L492 252 
         .end linenumbertable 
     .end code 
 .end method 

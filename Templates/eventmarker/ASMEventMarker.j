@@ -104,7 +104,8 @@ L137:
 .end method 
 
 .method public static render : (DDD)V 
-    .code stack 4 locals 6 
+    .code stack 4 locals 7 
+        .catch java/lang/Exception from L0 to L59 using L62 
 L0:     getstatic Field eventmarker/ASMEventMarker minecraft Lnet/minecraft/client/Minecraft; 
 L3:     invokevirtual Method net/minecraft/client/Minecraft isSingleplayer ()Z 
 L6:     ifeq L59 
@@ -132,17 +133,30 @@ L53:    invokestatic Method eventmarker/ASMEventMarker renderTicks (Ljava/util/L
 L56:    invokestatic Method asmrender/ASMRender restore ()V 
 
         .stack same 
-L59:    return 
-L60:    
+L59:    goto L75 
+
+        .stack stack_1 Object java/lang/Exception 
+L62:    astore 6 
+L64:    getstatic Field java/lang/System out Ljava/io/PrintStream; 
+L67:    aload 6 
+L69:    invokevirtual Method java/lang/Exception getMessage ()Ljava/lang/String; 
+L72:    invokevirtual Method java/io/PrintStream println (Ljava/lang/String;)V 
+
+        .stack same 
+L75:    return 
+L76:    
         .linenumbertable 
-            L0 39 
-            L9 41 
-            L13 42 
-            L23 43 
-            L34 44 
-            L45 45 
-            L56 46 
-            L59 48 
+            L0 41 
+            L9 43 
+            L13 44 
+            L23 45 
+            L34 46 
+            L45 47 
+            L56 48 
+            L59 54 
+            L62 51 
+            L64 53 
+            L75 55 
         .end linenumbertable 
     .end code 
 .end method 
@@ -456,39 +470,39 @@ L549:   goto L158
 L552:   return 
 L553:   
         .linenumbertable 
-            L0 52 
-            L8 54 
-            L22 56 
-            L35 57 
-            L42 58 
-            L49 59 
-            L60 61 
-            L65 63 
-            L84 67 
-            L94 68 
-            L105 69 
-            L115 68 
-            L121 70 
-            L129 71 
-            L141 54 
-            L147 75 
-            L180 78 
-            L190 80 
-            L200 81 
-            L214 83 
-            L247 84 
-            L281 85 
-            L315 81 
-            L324 90 
-            L334 91 
-            L348 93 
-            L381 94 
-            L415 95 
-            L449 91 
-            L455 98 
-            L515 103 
-            L549 107 
-            L552 108 
+            L0 59 
+            L8 61 
+            L22 63 
+            L35 64 
+            L42 65 
+            L49 66 
+            L60 68 
+            L65 70 
+            L84 74 
+            L94 75 
+            L105 76 
+            L115 75 
+            L121 77 
+            L129 78 
+            L141 61 
+            L147 82 
+            L180 85 
+            L190 87 
+            L200 88 
+            L214 90 
+            L247 91 
+            L281 92 
+            L315 88 
+            L324 97 
+            L334 98 
+            L348 100 
+            L381 101 
+            L415 102 
+            L449 98 
+            L455 105 
+            L515 110 
+            L549 114 
+            L552 115 
         .end linenumbertable 
     .end code 
     .signature (Ljava/util/List<Leventmarker/ASMEventMarker$TickEntry;>;Ljava/awt/Color;Ljava/lang/String;)V 

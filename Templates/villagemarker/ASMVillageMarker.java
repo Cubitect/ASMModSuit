@@ -38,13 +38,20 @@ public class ASMVillageMarker extends ASMRender
     
 	public static void render(double playerX, double playerY, double playerZ)
 	{
-        if(minecraft.isSingleplayer()) 
-        {
-        	setup(doDepthCheck);
-	    	translate((float)playerX, (float)playerY, (float)playerZ);
-	    	render();
-	    	ASMRender.restore();
-        }
+		try
+		{
+			if(minecraft.isSingleplayer()) 
+			{
+				setup(doDepthCheck);
+				translate((float)playerX, (float)playerY, (float)playerZ);
+				render();
+				ASMRender.restore();
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 	}
 	
     public static void render()

@@ -36,15 +36,22 @@ public class ASMEventMarker extends ASMRender
 	
 	public static void render(double playerX, double playerY, double playerZ)
 	{
-        if(minecraft.isSingleplayer()) 
-        {
-        	setup(false);
-	    	translate((float)playerX, (float)playerY, (float)playerZ);
-	    	renderTicks(tickCurrent, Color.BLUE, "§4");
-	    	renderTicks(tickPending, Color.BLUE, "§6");
-	    	renderTicks(tickBUD, Color.GREEN, "§2");
-	    	ASMRender.restore();
-        }
+		try
+		{
+			if(minecraft.isSingleplayer()) 
+			{
+				setup(false);
+				translate((float)playerX, (float)playerY, (float)playerZ);
+				renderTicks(tickCurrent, Color.BLUE, "§4");
+				renderTicks(tickPending, Color.BLUE, "§6");
+				renderTicks(tickBUD, Color.GREEN, "§2");
+				ASMRender.restore();
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void renderTicks(List<TickEntry> list, Color bcolor, String col)
