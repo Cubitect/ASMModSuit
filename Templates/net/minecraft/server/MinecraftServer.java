@@ -4,8 +4,8 @@ import net.minecraft.world.WorldServer;
 
 public class MinecraftServer 
 {
-	public WorldServer worldServerForDimension(int dimension)
+    public WorldServer worldServerForDimension(int dimension)
     {
-		return null;
-	}
+        return null;
+    }
 }

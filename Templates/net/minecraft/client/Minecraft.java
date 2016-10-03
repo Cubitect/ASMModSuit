@@ -7,21 +7,21 @@ import net.minecraft.client.gui.FontRenderer;
 
 public class Minecraft 
 {
-	public EntityPlayerSP thePlayer;
-	public Timer timer;
-	public FontRenderer fontRendererObj;
-	
-	public static Minecraft getMinecraft()
+    public EntityPlayerSP thePlayer;
+    public Timer timer;
+    public FontRenderer fontRendererObj;
+    
+    public static Minecraft getMinecraft()
     {
         return null;
     }
     
     public boolean isSingleplayer()
     {
-		return true;
-	}
-	
-	public IntegratedServer getIntegratedServer()
+        return true;
+    }
+    
+    public IntegratedServer getIntegratedServer()
     {
         return null;
     }

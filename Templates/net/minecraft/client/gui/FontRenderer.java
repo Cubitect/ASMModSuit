@@ -14,8 +14,8 @@ public class FontRenderer
         return 0;
     }
     
-	public int getStringWidth(String text)
+    public int getStringWidth(String text)
     {
-		return 0;
-	}
+        return 0;
+    }
 }

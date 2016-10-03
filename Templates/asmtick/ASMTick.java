@@ -68,13 +68,13 @@ public class ASMTick
         
         if(sleepLock)
         {
-			try {
+            try {
                 Thread.sleep(ms2Tick);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-			return 0;
-		}
+            return 0;
+        }
         
         do {
             try {
