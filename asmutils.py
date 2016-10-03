@@ -22,12 +22,6 @@ class Util:
         self.classdir = join(self.curdir, 'cache', self.vernam, 'classes')
         self.temdir = join(self.curdir, 'Templates')
 
-        self.python2 = sys.executable
-        print 'Python executable is: ' + self.python2
-
-        self.disasmpy = self.python2+' '+join(self.curdir,'Krakatau-master','disassemble.py')
-        self.asmpy = self.python2+' '+join(self.curdir,'Krakatau-master','assemble.py')
-
         self.maps = dict()
 
     def setup(self):
@@ -72,6 +66,14 @@ class Util:
         except:
             return None
 
+    def disasmpy(self,className):
+        cmd = sys.executable+' "'+join(self.curdir,'Krakatau-master','disassemble.py')+'"'
+        os.system(cmd+' -out "'+self.asmdir+'" "'+join(self.classdir,className)+'.class" > '+os.devnull)
+
+    def asmpyall(self):
+        cmd = sys.executable+' "'+join(self.curdir,'Krakatau-master','assemble.py')+'"'
+        os.system(cmd+' -out "'+self.modcdir+'" -r -q "'+self.modjdir+'"')
+
     def map2j(self,className):
         className = self.getmap(className)
         outf = join(self.modjdir,className)+'.j'
@@ -81,7 +83,7 @@ class Util:
         if isfile(outf):
             return outf
         print 'Disassembling ' + className + '...'
-        os.system(self.disasmpy+' -out '+self.asmdir+' '+join(self.classdir,className)+'.class > '+os.devnull)
+        self.disasmpy(className)
         return outf
 
     def getjfile(self,className):
@@ -92,7 +94,7 @@ class Util:
         if isfile(outf):
             return outf
         print 'Disassembling ' + className + '...'
-        os.system(self.disasmpy+' -out '+self.asmdir+' '+join(self.classdir,className)+'.class > '+os.devnull)
+        self.disasmpy(className)
         return outf
 
     def readj(self,className):
@@ -115,8 +117,7 @@ class Util:
     def install(self,instver):
         # create the mod
         print 'Reassembling the modded classes...'
-        os.system(self.asmpy+' -out '+self.modcdir+' -r -q '+self.modjdir)
-
+        self.asmpyall()
         # install the mod
         copytree(self.modcdir,self.classdir)
         instdir = self.jardir.replace(self.vernam,instver)
@@ -125,6 +126,8 @@ class Util:
         if not isdir(instdir):
             os.makedirs(instdir)
         instzip = shutil.make_archive(instjar,format="zip",root_dir=self.classdir)
+        if isfile(instjar):
+            os.remove(instjar)
         os.rename(instzip,instjar)
 
         oldjson = join(self.jardir,self.vernam+'.json')
