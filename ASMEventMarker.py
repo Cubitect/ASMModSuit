@@ -137,12 +137,10 @@ def create_mod(util):
         pos = findOps(lines,pos+1,[['ldc','culling']])
         if pos is None:
             break
-        pos = findOps(lines,pos+1,[['dstore']])
-        playerX = endw(lines[pos],1)
-        pos = findOps(lines,pos+1,[['dstore']])
-        playerY = endw(lines[pos],1)
-        pos = findOps(lines,pos+1,[['dstore']])
-        playerZ = endw(lines[pos],1)
+        pos = findOps(lines,pos+1,[['dload'],['dload'],['dload']])
+        playerX = endw(lines[pos-2],1)
+        playerY = endw(lines[pos-1],1)
+        playerZ = endw(lines[pos  ],1)
         pos = findOps(lines,pos+1,[['ldc','hand']])
         lines.insert(pos+2,'dload '+playerX+'\n')
         lines.insert(pos+3,'dload '+playerY+'\n')
