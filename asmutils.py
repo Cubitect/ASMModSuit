@@ -114,7 +114,15 @@ class Util:
         with open(m,'w') as fout:
             fout.write(''.join(lines))
 
-    def install(self,instver):
+    def isrelease(self):
+        oldjson = join(self.jardir,self.vernam+'.json')
+        if(isfile(oldjson) and self.side == 'client'):
+            with open(oldjson,'r') as fin:
+                if any(['"type": "snapshot"' in l for l in fin.readlines()]):
+                    return False
+        return True
+
+    def install(self,instver,mkrls):
         # create the mod
         print 'Reassembling the modded classes...'
         self.asmpyall()
@@ -151,7 +159,7 @@ class Util:
                                     bracketCnt += 1
                                 if '}' in line:
                                     bracketCnt -= 1
-                        if '"type": "snapshot"' in line:
+                        if mkrls and ('"type": "snapshot"' in line):
                             line = line.replace('snapshot','release')
                         fout.write(line)
 
