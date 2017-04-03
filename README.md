@@ -1,23 +1,21 @@
 #ASM Mod Suit
 ASM Mod Suit by [Cubitect](https://github.com/Cubitect) [[YouTube]](https://www.youtube.com/channel/UC1VmvHvATdD9ZkR1-rpoMeA) is a dynamic mod creation tool and installer. It assembles custom jar-mods for any newer Minecraft version, using the assembler and disassembler [Krakatau Bytecode Tools by Robert Grosse](https://github.com/Storyyeller/Krakatau). 
 
-Mods currently installable:
-
-| Mod              | MC versions | Description                                           |
-| ---------------- | ----------- | ----------------------------------------------------- |
-| ASMTick          | 1.7+        | Allows you to change the speed at which the game runs |
-| ASMVillageMarker | 1.8+        | Highlights villages in the world                      |
-| ASMEventMarker   | 1.8+        | Highlights tile ticks and block actions in the world  |
+There are two installable mods currently:
+Mod | MC versions | Description
+-----------------
+ASMTick | 1.7+ | Allows you to change the speed with which the game runs
+ASMVillageMarker | 1.8+ | Highlights villages in the world
 
 ###Requirements
 Python 2.7
 
 ###Installation
-To install any of the mods, simply download (or clone) this repository and run the `install.py` script, i.e.:
+To install the any of the mods, simply download (or clone) this repository and run the `install.py` script, i.e.:
 
-`python2 install.py`. 
+`python2 install_mod.py`. 
 
-This will open a basic GUI interface, where you can browse for the minecraft-version jar-file for which you want to install the mods. Then select the mods you want to install, and the name of the new modded copy. Finally press "install" and wait until you get the "Done" popup.
+This will open a basic GUI interface, where you can browse for the minecraft version jar-file for which you want to install the mods. Then select the mods you want to install, and the name of the new modded copy. Finally press "install" and wait until you get the "Done" popup.
 
 
 #ASMTick
@@ -47,6 +45,6 @@ ASMVillageMarker is a client-only mod which highlights village radii and golem s
 A config file called `ASMVillageMarker.conf` will be created in your minecraft direcory when you start up the game and enter a world.
 
 
-#ASMEventMarker
-ASMEventMarker is a client mod which highlights tile-ticks (e.g. repeaters & comparators) and block actions (e.g. pistons & note blocks). The highlighting includes some basic info about the event, like its scheduled (world-)time, priority and index.
+#ASMStructMarker
+ASMStructMarker is a client mod that reads the content of the structure save files and outlines them in the world.
 

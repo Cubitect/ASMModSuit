@@ -11,6 +11,7 @@ from asmutils import *
 import ASMTick
 import ASMVillageMarker
 import ASMEventMarker
+import ASMStructMarker
 
 util = None
 
@@ -20,12 +21,14 @@ top.wm_title("ASM Installer")
 installTick = IntVar()
 installVM = IntVar()
 installEM = IntVar()
+installSM = IntVar()
 jarpath = StringVar()
 instver = StringVar()
 
 installTick.set(1)
 installVM.set(1)
 installEM.set(1)
+installSM.set(1)
 
 def getJarpath():
     global jarpath
@@ -89,8 +92,23 @@ def startInstall():
             tkMessageBox.showerror("Error", "Mod 'ASMEventMarker' could not be created.\nView stdout for more information.\n\n" + str(e))
             return
 
+    if installSM.get() == 1:
+        try:
+            ASMStructMarker.create_mod(util)
+        except Exception as e:
+            tkMessageBox.showerror("Error", "Mod 'ASMStructMarker' could not be created.\nView stdout for more information.\n\n" + str(e))
+            return
+
     try:
-        util.install(instver.get())
+        mkrls = False
+        if not util.isrelease():
+            mkrls = tkMessageBox.askyesno(
+                'Jar is a Snapshot',
+                'The original Mincraft version appears to be a SNAPSHOT. '+
+                'Snapshots may be atomatically deleted by the Minecraft Launcher.\n\n'+
+                'Would you like to change the modded version to a RELEASE?')
+        util.install(instver.get(), mkrls)
+
     except Exception as e:
         tkMessageBox.showerror("Error", "Something went wrong while creating the modded version:\n" + str(e))
         return
@@ -112,13 +130,15 @@ C2 = Checkbutton(top,text="ASM Village Marker",variable=installVM,onvalue=1,offv
         .grid(row=4, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
 C3 = Checkbutton(top,text="ASM Event Marker",variable=installEM,onvalue=1,offvalue=0)\
         .grid(row=5, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
+C3 = Checkbutton(top,text="ASM Structure Marker",variable=installSM,onvalue=1,offvalue=0)\
+        .grid(row=6, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
 
 L3 = Label(top,text="Name of modded version:")\
-        .grid(row=6, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
-E2 = Entry(top,bd=4,textvariable=instver,width=20)\
         .grid(row=7, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
+E2 = Entry(top,bd=4,textvariable=instver,width=20)\
+        .grid(row=8, column=0, pady=4, padx=8, sticky=Tkinter.N+Tkinter.W)
 
 B2 = Button(top,text="Install",command=startInstall)\
-        .grid(row=7, column=1, pady=4, padx=8, sticky=Tkinter.N+Tkinter.E)
+        .grid(row=9, column=1, pady=4, padx=8, sticky=Tkinter.N+Tkinter.E)
 
 top.mainloop()

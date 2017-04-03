@@ -40,6 +40,7 @@ def create_mod(util):
     lines.insert(pos+0,'invokestatic Method '+util.getmap('ASMStructMarker')+' updateAll ()V\n')
     util.write2mod('WorldServer',lines)
 
+
     print 'Injecting render call...'
     lines = util.readj('EntityRenderer')
     pos = 0
