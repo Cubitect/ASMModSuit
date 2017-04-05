@@ -51,6 +51,10 @@ public class ASMEventMarker extends ASMRender
         catch(Exception e)
         {
             System.out.println(e.getMessage());
+            worldTime = 0;
+            tickCurrent.clear();
+            tickPending.clear();
+            tickBUD.clear();
         }
     }
     
