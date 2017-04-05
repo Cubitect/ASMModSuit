@@ -8,6 +8,7 @@
 .end fieldattributes 
 .field public static levelModify J 
 .field public static playerDim I 
+.field public static maxRenderSqDist D 
 
 .method public <init> : ()V 
     .code stack 1 locals 1 
@@ -78,15 +79,15 @@ L117:   goto L84
 L120:   return 
 L121:   
         .linenumbertable 
-            L0 37 
-            L32 38 
-            L64 40 
-            L68 41 
-            L72 43 
-            L103 45 
-            L112 46 
-            L117 47 
-            L120 48 
+            L0 39 
+            L32 40 
+            L64 42 
+            L68 43 
+            L72 45 
+            L103 47 
+            L112 48 
+            L117 49 
+            L120 50 
         .end linenumbertable 
     .end code 
 .end method 
@@ -130,12 +131,12 @@ L40:    iload_2
 L41:    ireturn 
 L42:    
         .linenumbertable 
-            L0 52 
-            L2 53 
-            L17 54 
-            L22 55 
-            L34 53 
-            L40 57 
+            L0 54 
+            L2 55 
+            L17 56 
+            L22 57 
+            L34 55 
+            L40 59 
         .end linenumbertable 
     .end code 
 .end method 
@@ -263,29 +264,29 @@ L188:   aconst_null
 L189:   areturn 
 L190:   
         .linenumbertable 
-            L0 66 
-            L11 67 
-            L23 68 
-            L28 69 
-            L33 70 
-            L39 71 
-            L45 72 
-            L65 73 
-            L69 75 
-            L75 77 
-            L92 79 
-            L95 80 
-            L116 82 
-            L126 85 
-            L134 87 
-            L167 90 
-            L172 92 
-            L175 94 
-            L176 95 
-            L180 99 
-            L183 97 
-            L184 98 
-            L188 101 
+            L0 68 
+            L11 69 
+            L23 70 
+            L28 71 
+            L33 72 
+            L39 73 
+            L45 74 
+            L65 75 
+            L69 77 
+            L75 79 
+            L92 81 
+            L95 82 
+            L116 84 
+            L126 87 
+            L134 89 
+            L167 92 
+            L172 94 
+            L175 96 
+            L176 97 
+            L180 101 
+            L183 99 
+            L184 100 
+            L188 103 
         .end linenumbertable 
     .end code 
 .end method 
@@ -562,64 +563,64 @@ L452:   goto L139
 L455:   return 
 L456:   
         .linenumbertable 
-            L0 107 
-            L22 109 
-            L31 110 
-            L38 111 
-            L44 113 
-            L48 114 
-            L61 115 
-            L69 116 
-            L72 117 
-            L80 118 
-            L92 119 
-            L95 117 
-            L101 121 
-            L107 122 
-            L118 123 
-            L121 114 
-            L127 129 
-            L148 131 
-            L155 132 
-            L158 134 
-            L164 135 
-            L177 137 
-            L182 139 
-            L195 140 
-            L206 143 
-            L219 144 
-            L222 146 
-            L231 147 
-            L241 150 
-            L247 151 
-            L254 153 
-            L259 154 
-            L262 156 
-            L276 157 
-            L287 158 
-            L290 159 
-            L301 160 
-            L314 161 
-            L317 159 
-            L326 163 
-            L334 164 
-            L343 165 
-            L358 166 
-            L373 167 
-            L388 168 
-            L403 169 
-            L418 170 
-            L433 172 
-            L446 173 
-            L449 129 
-            L455 176 
+            L0 109 
+            L22 111 
+            L31 112 
+            L38 113 
+            L44 115 
+            L48 116 
+            L61 117 
+            L69 118 
+            L72 119 
+            L80 120 
+            L92 121 
+            L95 119 
+            L101 123 
+            L107 124 
+            L118 125 
+            L121 116 
+            L127 131 
+            L148 133 
+            L155 134 
+            L158 136 
+            L164 137 
+            L177 139 
+            L182 141 
+            L195 142 
+            L206 145 
+            L219 146 
+            L222 148 
+            L231 149 
+            L241 152 
+            L247 153 
+            L254 155 
+            L259 156 
+            L262 158 
+            L276 159 
+            L287 160 
+            L290 161 
+            L301 162 
+            L314 163 
+            L317 161 
+            L326 165 
+            L334 166 
+            L343 167 
+            L358 168 
+            L373 169 
+            L388 170 
+            L403 171 
+            L418 172 
+            L433 174 
+            L446 175 
+            L449 131 
+            L455 178 
         .end linenumbertable 
     .end code 
 .end method 
 
 .method public static render : (DDD)V 
-    .code stack 8 locals 12 
-        .catch java/lang/Exception from L0 to L187 using L190 
+    .code stack 8 locals 16 
+        .catch java/lang/Exception from L0 to L248 using L251 
 L0:     iconst_1 
 L1:     invokestatic Method structmarker/ASMStructMarker setup (Z)V 
 L4:     dload_0 
@@ -637,7 +638,7 @@ L25:    astore 6
         .stack append Object java/util/Iterator 
 L27:    aload 6 
 L29:    invokeinterface InterfaceMethod java/util/Iterator hasNext ()Z 1 
-L34:    ifeq L184 
+L34:    ifeq L245 
 L37:    aload 6 
 L39:    invokeinterface InterfaceMethod java/util/Iterator next ()Ljava/lang/Object; 1 
 L44:    checkcast structmarker/ASMStructMarker$StructFType 
@@ -662,84 +663,126 @@ L84:    astore 9
         .stack append Object java/util/List Object java/util/Iterator 
 L86:    aload 9 
 L88:    invokeinterface InterfaceMethod java/util/Iterator hasNext ()Z 1 
-L93:    ifeq L181 
+L93:    ifeq L242 
 L96:    aload 9 
 L98:    invokeinterface InterfaceMethod java/util/Iterator next ()Ljava/lang/Object; 1 
 L103:   checkcast structmarker/ASMStructMarker$BB 
 L106:   astore 10 
-L108:   aload 10 
-L110:   getfield Field structmarker/ASMStructMarker$BB x1 I 
-L113:   i2f 
-L114:   ldc +0.004999999888241291f 
-L116:   fsub 
-L117:   aload 10 
-L119:   getfield Field structmarker/ASMStructMarker$BB y1 I 
-L122:   i2f 
-L123:   ldc +0.004999999888241291f 
-L125:   fsub 
-L126:   aload 10 
-L128:   getfield Field structmarker/ASMStructMarker$BB z1 I 
-L131:   i2f 
-L132:   ldc +0.004999999888241291f 
-L134:   fsub 
-L135:   aload 10 
-L137:   getfield Field structmarker/ASMStructMarker$BB x2 I 
-L140:   iconst_1 
+L108:   ldc2_w +0.5 
+L111:   aload 10 
+L113:   getfield Field structmarker/ASMStructMarker$BB x1 I 
+L116:   aload 10 
+L118:   getfield Field structmarker/ASMStructMarker$BB x2 I 
+L121:   iadd 
+L122:   i2d 
+L123:   dmul 
+L124:   dload_0 
+L125:   dsub 
+L126:   dstore 11 
+L128:   ldc2_w +0.5 
+L131:   aload 10 
+L133:   getfield Field structmarker/ASMStructMarker$BB y1 I 
+L136:   aload 10 
+L138:   getfield Field structmarker/ASMStructMarker$BB y2 I 
 L141:   iadd 
-L142:   i2f 
-L143:   ldc +0.004999999888241291f 
-L145:   fadd 
-L146:   aload 10 
-L148:   getfield Field structmarker/ASMStructMarker$BB y2 I 
-L151:   iconst_1 
-L152:   iadd 
-L153:   i2f 
-L154:   ldc +0.004999999888241291f 
-L156:   fadd 
-L157:   aload 10 
-L159:   getfield Field structmarker/ASMStructMarker$BB z2 I 
-L162:   iconst_1 
-L163:   iadd 
-L164:   i2f 
-L165:   ldc +0.004999999888241291f 
-L167:   fadd 
-L168:   aload 7 
-L170:   getfield Field structmarker/ASMStructMarker$StructFType col Ljava/awt/Color; 
-L173:   ldc +0.0024999999441206455f 
-L175:   invokestatic Method structmarker/ASMStructMarker drawBox (FFFFFFLjava/awt/Color;F)V 
-L178:   goto L86 
+L142:   i2d 
+L143:   dmul 
+L144:   dload_2 
+L145:   dsub 
+L146:   dstore 13 
+L148:   dload 11 
+L150:   dload 11 
+L152:   dmul 
+L153:   dload 13 
+L155:   dload 13 
+L157:   dmul 
+L158:   dadd 
+L159:   getstatic Field structmarker/ASMStructMarker maxRenderSqDist D 
+L162:   dcmpl 
+L163:   ifle L169 
+L166:   goto L86 
 
-        .stack chop 3 
-L181:   goto L27 
+        .stack append Object structmarker/ASMStructMarker$BB Double Double 
+L169:   aload 10 
+L171:   getfield Field structmarker/ASMStructMarker$BB x1 I 
+L174:   i2f 
+L175:   ldc +0.004999999888241291f 
+L177:   fsub 
+L178:   aload 10 
+L180:   getfield Field structmarker/ASMStructMarker$BB y1 I 
+L183:   i2f 
+L184:   ldc +0.004999999888241291f 
+L186:   fsub 
+L187:   aload 10 
+L189:   getfield Field structmarker/ASMStructMarker$BB z1 I 
+L192:   i2f 
+L193:   ldc +0.004999999888241291f 
+L195:   fsub 
+L196:   aload 10 
+L198:   getfield Field structmarker/ASMStructMarker$BB x2 I 
+L201:   iconst_1 
+L202:   iadd 
+L203:   i2f 
+L204:   ldc +0.004999999888241291f 
+L206:   fadd 
+L207:   aload 10 
+L209:   getfield Field structmarker/ASMStructMarker$BB y2 I 
+L212:   iconst_1 
+L213:   iadd 
+L214:   i2f 
+L215:   ldc +0.004999999888241291f 
+L217:   fadd 
+L218:   aload 10 
+L220:   getfield Field structmarker/ASMStructMarker$BB z2 I 
+L223:   iconst_1 
+L224:   iadd 
+L225:   i2f 
+L226:   ldc +0.004999999888241291f 
+L228:   fadd 
+L229:   aload 7 
+L231:   getfield Field structmarker/ASMStructMarker$StructFType col Ljava/awt/Color; 
+L234:   ldc +0.0024999999441206455f 
+L236:   invokestatic Method structmarker/ASMStructMarker drawBox (FFFFFFLjava/awt/Color;F)V 
+L239:   goto L86 
+
+        .stack full 
+            locals Double Double Double Object java/util/Iterator 
+            stack 
+        .end stack 
+L242:   goto L27 
 
         .stack chop 1 
-L184:   invokestatic Method asmrender/ASMRender restore ()V 
-L187:   goto L197 
+L245:   invokestatic Method asmrender/ASMRender restore ()V 
+L248:   goto L258 
 
         .stack stack_1 Object java/lang/Exception 
-L190:   astore 6 
-L192:   aload 6 
-L194:   invokevirtual Method java/lang/Exception printStackTrace ()V 
+L251:   astore 6 
+L253:   aload 6 
+L255:   invokevirtual Method java/lang/Exception printStackTrace ()V 
 
         .stack same 
-L197:   return 
-L198:   
+L258:   return 
+L259:   
         .linenumbertable 
-            L0 185 
-            L4 186 
-            L14 188 
-            L49 190 
-            L60 191 
-            L63 193 
-            L77 195 
-            L108 198 
-            L178 199 
-            L181 200 
-            L184 202 
-            L187 207 
-            L190 204 
-            L192 206 
-            L197 208 
+            L0 187 
+            L4 188 
+            L14 190 
+            L49 192 
+            L60 193 
+            L63 195 
+            L77 197 
+            L108 199 
+            L128 200 
+            L148 201 
+            L166 202 
+            L169 205 
+            L239 206 
+            L242 207 
+            L245 209 
+            L248 214 
+            L251 211 
+            L253 213 
+            L258 215 
         .end linenumbertable 
     .end code 
 .end method 
@@ -750,81 +793,84 @@ L0:     new java/util/HashMap
 L3:     dup 
 L4:     invokespecial Method java/util/HashMap <init> ()V 
 L7:     putstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L10:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L13:    ldc 'EndCity.dat' 
-L15:    new structmarker/ASMStructMarker$StructFType 
-L18:    dup 
-L19:    iconst_1 
-L20:    getstatic Field java/awt/Color MAGENTA Ljava/awt/Color; 
-L23:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L26:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L29:    pop 
-L30:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L33:    ldc 'Fortress.dat' 
-L35:    new structmarker/ASMStructMarker$StructFType 
-L38:    dup 
-L39:    iconst_m1 
-L40:    getstatic Field java/awt/Color RED Ljava/awt/Color; 
-L43:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L46:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L49:    pop 
-L50:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L53:    ldc 'Mineshaft.dat' 
-L55:    new structmarker/ASMStructMarker$StructFType 
-L58:    dup 
-L59:    iconst_0 
-L60:    getstatic Field java/awt/Color GREEN Ljava/awt/Color; 
-L63:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L66:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L69:    pop 
-L70:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L73:    ldc 'Monument.dat' 
-L75:    new structmarker/ASMStructMarker$StructFType 
-L78:    dup 
-L79:    iconst_0 
-L80:    getstatic Field java/awt/Color BLUE Ljava/awt/Color; 
-L83:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L86:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L89:    pop 
-L90:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L93:    ldc 'Stronghold.dat' 
-L95:    new structmarker/ASMStructMarker$StructFType 
-L98:    dup 
-L99:    iconst_0 
-L100:   getstatic Field java/awt/Color GRAY Ljava/awt/Color; 
-L103:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L106:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L109:   pop 
-L110:   getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L113:   ldc 'Temple.dat' 
-L115:   new structmarker/ASMStructMarker$StructFType 
-L118:   dup 
-L119:   iconst_0 
-L120:   getstatic Field java/awt/Color CYAN Ljava/awt/Color; 
-L123:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L126:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L129:   pop 
-L130:   getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
-L133:   ldc 'Village.dat' 
-L135:   new structmarker/ASMStructMarker$StructFType 
-L138:   dup 
-L139:   iconst_0 
-L140:   getstatic Field java/awt/Color YELLOW Ljava/awt/Color; 
-L143:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
-L146:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
-L149:   pop 
-L150:   return 
-L151:   
+L10:    ldc2_w +262144.0 
+L13:    putstatic Field structmarker/ASMStructMarker maxRenderSqDist D 
+L16:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L19:    ldc 'EndCity.dat' 
+L21:    new structmarker/ASMStructMarker$StructFType 
+L24:    dup 
+L25:    iconst_1 
+L26:    getstatic Field java/awt/Color MAGENTA Ljava/awt/Color; 
+L29:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L32:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L35:    pop 
+L36:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L39:    ldc 'Fortress.dat' 
+L41:    new structmarker/ASMStructMarker$StructFType 
+L44:    dup 
+L45:    iconst_m1 
+L46:    getstatic Field java/awt/Color RED Ljava/awt/Color; 
+L49:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L52:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L55:    pop 
+L56:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L59:    ldc 'Mineshaft.dat' 
+L61:    new structmarker/ASMStructMarker$StructFType 
+L64:    dup 
+L65:    iconst_0 
+L66:    getstatic Field java/awt/Color GREEN Ljava/awt/Color; 
+L69:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L72:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L75:    pop 
+L76:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L79:    ldc 'Monument.dat' 
+L81:    new structmarker/ASMStructMarker$StructFType 
+L84:    dup 
+L85:    iconst_0 
+L86:    getstatic Field java/awt/Color BLUE Ljava/awt/Color; 
+L89:    invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L92:    invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L95:    pop 
+L96:    getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L99:    ldc 'Stronghold.dat' 
+L101:   new structmarker/ASMStructMarker$StructFType 
+L104:   dup 
+L105:   iconst_0 
+L106:   getstatic Field java/awt/Color GRAY Ljava/awt/Color; 
+L109:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L112:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L115:   pop 
+L116:   getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L119:   ldc 'Temple.dat' 
+L121:   new structmarker/ASMStructMarker$StructFType 
+L124:   dup 
+L125:   iconst_0 
+L126:   getstatic Field java/awt/Color CYAN Ljava/awt/Color; 
+L129:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L132:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L135:   pop 
+L136:   getstatic Field structmarker/ASMStructMarker structMap Ljava/util/HashMap; 
+L139:   ldc 'Village.dat' 
+L141:   new structmarker/ASMStructMarker$StructFType 
+L144:   dup 
+L145:   iconst_0 
+L146:   getstatic Field java/awt/Color YELLOW Ljava/awt/Color; 
+L149:   invokespecial Method structmarker/ASMStructMarker$StructFType <init> (ILjava/awt/Color;)V 
+L152:   invokevirtual Method java/util/HashMap put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; 
+L155:   pop 
+L156:   return 
+L157:   
         .linenumbertable 
             L0 20 
-            L10 26 
-            L30 27 
-            L50 28 
-            L70 29 
-            L90 30 
-            L110 31 
-            L130 32 
-            L150 33 
+            L10 24 
+            L16 28 
+            L36 29 
+            L56 30 
+            L76 31 
+            L96 32 
+            L116 33 
+            L136 34 
+            L156 35 
         .end linenumbertable 
     .end code 
 .end method 

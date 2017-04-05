@@ -20,6 +20,8 @@ public class ASMStructMarker extends ASMRender
 	public static HashMap<String, StructFType> structMap = new HashMap<String, StructFType>();
 	public static long levelModify;
 	public static int playerDim;
+    
+    public static double maxRenderSqDist = 512.0*512.0;
 	
 	static
 	{
@@ -187,13 +189,18 @@ public class ASMStructMarker extends ASMRender
 	    	
 	    	for(StructFType st : structMap.values())
 	    	{
-	    		if(st.dim != playerDim)
-	    			continue;
-	    		
-	    		List<BB> bbscpy = new ArrayList(st.bbs);
+                if(st.dim != playerDim)
+                    continue;
+                
+                List<BB> bbscpy = new ArrayList(st.bbs);
 	    		
 		    	for(BB bb : bbscpy)
 		    	{
+                    double delx = 0.5*(bb.x1 + bb.x2) - playerX;
+                    double dely = 0.5*(bb.y1 + bb.y2) - playerY;
+                    if(delx*delx + dely*dely > maxRenderSqDist)
+                        continue;
+                    
 		    		final float d = 0.005f;
 		    		drawBox(bb.x1-d, bb.y1-d, bb.z1-d, bb.x2+1+d, bb.y2+1+d, bb.z2+1+d, st.col, d/2);
 		    	}
