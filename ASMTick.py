@@ -117,8 +117,10 @@ def create_mod(util):
         pos = findOps(lines,pos+1,[['.field','public','F']])
         util.setmap('Timer.renderPartialTicks',endw(lines[pos],2))
         pos = findOps(lines,pos+1,[['.field','public','F']])
-        util.setmap('Timer.timerSpeed',endw(lines[pos],2))
-        pos = findOps(lines,pos+1,[['.field','public','F']])
+        #util.setmap('Timer.timerSpeed',endw(lines[pos],2))
+        tmp = findOps(lines,pos+1,[['.field','public','F']])
+        if tmp is not None:
+            pos = tmp
         util.setmap('Timer.elapsedPartialTicks',endw(lines[pos],2))
 
 
@@ -128,13 +130,13 @@ def create_mod(util):
     lines = util.readt('ASMTick')
     if util.side == 'client':
         lines = '\1'.join(lines)
-        lines = lines.replace('net/minecraft/client/Minecraft', util.getmap('Minecraft'))
-        lines = lines.replace('net/minecraft/util/Timer', util.getmap('Timer'))
-        lines = lines.replace('getMinecraft', util.getmap('Minecraft.getMinecraft'))
-        lines = lines.replace('elapsedPartialTicks', util.getmap('Timer.elapsedPartialTicks'))
-        lines = lines.replace('elapsedTicks', util.getmap('Timer.elapsedTicks'))
-        lines = lines.replace('renderPartialTicks', util.getmap('Timer.renderPartialTicks'))
-        lines = lines.replace('timer', util.getmap('Minecraft.timer'))
+        lines = lines.replace('net/minecraft/client/Minecraft',util.getmap('Minecraft'))
+        lines = lines.replace('net/minecraft/util/Timer',util.getmap('Timer'))
+        lines = lines.replace('getMinecraft',util.getmap('Minecraft.getMinecraft'))
+        lines = lines.replace('elapsedPartialTicks',util.getmap('Timer.elapsedPartialTicks'))
+        lines = lines.replace('elapsedTicks',util.getmap('Timer.elapsedTicks'))
+        lines = lines.replace('renderPartialTicks',util.getmap('Timer.renderPartialTicks'))
+        lines = lines.replace('timer',util.getmap('Minecraft.timer'))
         lines = lines.split('\1')
     elif util.side == 'server':
         pos = -1 + findOps(lines,0,[['putstatic','isRemoteServer']])
@@ -149,13 +151,13 @@ def create_mod(util):
     lines = '\1'.join(lines)
     lines = lines.replace('net/minecraft/command/ICommandSender',util.getmap('ICommandSender'))
     lines = lines.replace('net/minecraft/command/CommandBase',util.getmap('CommandBase'))
-    lines = lines.replace('net/minecraft/command/ICommand', util.getmap('ICommand'))
+    lines = lines.replace('net/minecraft/command/ICommand',util.getmap('ICommand'))
     lines = lines.replace('getCommandUsage',util.getmap('CommandBase.getCommandUsage'))
     lines = lines.replace('getCommandName',util.getmap('CommandBase.getCommandName'))
     lines = lines.replace('getRequiredPermissionLevel',util.getmap('CommandBase.getRequiredPermissionLevel'))
     lines = lines.replace('notifyCommandListener',util.getmap('CommandBase.notifyOperators'))
-    lines = lines.replace('execute', util.getmap('CommandBase.execute'))
-    lines = lines.replace('processCommand', util.getmap('CommandBase.processCommand'))
+    lines = lines.replace('execute',util.getmap('CommandBase.execute'))
+    lines = lines.replace('processCommand',util.getmap('CommandBase.processCommand'))
     lines = lines.split('\1')
     util.write2mod('CommandTickrate',lines)
 
