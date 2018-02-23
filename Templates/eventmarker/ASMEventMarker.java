@@ -186,6 +186,11 @@ public class ASMEventMarker extends ASMRender
             {
                 param += "[Players]";
             }
+            
+            else
+            {
+                param += "Unkwown:"+block;
+            }
         }
         
         public Long getPosLong()

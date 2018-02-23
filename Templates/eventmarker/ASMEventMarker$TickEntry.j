@@ -236,7 +236,7 @@ L382:   ldc '[Pitch]'
 L384:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L387:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L390:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L393:   goto L821 
+L393:   goto L857 
 
         .stack same 
 L396:   aload_0 
@@ -318,7 +318,7 @@ L583:   ldc 'Down'
 L585:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L588:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L591:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L594:   goto L821 
+L594:   goto L857 
 
         .stack same 
 L597:   new java/lang/StringBuilder 
@@ -332,7 +332,7 @@ L612:   ldc 'Up'
 L614:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L617:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L620:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L623:   goto L821 
+L623:   goto L857 
 
         .stack same 
 L626:   new java/lang/StringBuilder 
@@ -346,7 +346,7 @@ L641:   ldc 'South'
 L643:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L646:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L649:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L652:   goto L821 
+L652:   goto L857 
 
         .stack same 
 L655:   new java/lang/StringBuilder 
@@ -360,7 +360,7 @@ L670:   ldc 'West'
 L672:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L675:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L678:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L681:   goto L821 
+L681:   goto L857 
 
         .stack same 
 L684:   new java/lang/StringBuilder 
@@ -374,7 +374,7 @@ L699:   ldc 'North'
 L701:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L704:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L707:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L710:   goto L821 
+L710:   goto L857 
 
         .stack same 
 L713:   new java/lang/StringBuilder 
@@ -388,7 +388,7 @@ L728:   ldc 'East'
 L730:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L733:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L736:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L739:   goto L821 
+L739:   goto L857 
 
         .stack same 
 L742:   new java/lang/StringBuilder 
@@ -402,7 +402,7 @@ L757:   ldc 'Unknown'
 L759:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L762:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L765:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
-L768:   goto L821 
+L768:   goto L857 
 
         .stack same 
 L771:   aload_0 
@@ -414,7 +414,7 @@ L783:   aload_0
 L784:   getfield Field eventmarker/ASMEventMarker$TickEntry block Ljava/lang/String; 
 L787:   ldc 'Chest' 
 L789:   invokevirtual Method java/lang/String contains (Ljava/lang/CharSequence;)Z 
-L792:   ifeq L821 
+L792:   ifeq L824 
 
         .stack same 
 L795:   new java/lang/StringBuilder 
@@ -428,10 +428,27 @@ L810:   ldc '[Players]'
 L812:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
 L815:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
 L818:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
+L821:   goto L857 
 
         .stack same 
-L821:   return 
-L822:   
+L824:   new java/lang/StringBuilder 
+L827:   dup 
+L828:   invokespecial Method java/lang/StringBuilder <init> ()V 
+L831:   aload_0 
+L832:   dup_x1 
+L833:   getfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
+L836:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
+L839:   ldc 'Unkwown:' 
+L841:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
+L844:   aload_0 
+L845:   getfield Field eventmarker/ASMEventMarker$TickEntry block Ljava/lang/String; 
+L848:   invokevirtual Method java/lang/StringBuilder append (Ljava/lang/String;)Ljava/lang/StringBuilder; 
+L851:   invokevirtual Method java/lang/StringBuilder toString ()Ljava/lang/String; 
+L854:   putfield Field eventmarker/ASMEventMarker$TickEntry param Ljava/lang/String; 
+
+        .stack same 
+L857:   return 
+L858:   
         .linenumbertable 
             L0 141 
             L4 142 
@@ -466,7 +483,8 @@ L822:
             L742 181 
             L771 185 
             L795 187 
-            L821 189 
+            L824 192 
+            L857 194 
         .end linenumbertable 
     .end code 
 .end method 
@@ -498,7 +516,7 @@ L35:    invokestatic Method java/lang/Long valueOf (J)Ljava/lang/Long;
 L38:    areturn 
 L39:    
         .linenumbertable 
-            L0 193 
+            L0 198 
         .end linenumbertable 
     .end code 
 .end method 

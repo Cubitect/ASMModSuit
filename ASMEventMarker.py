@@ -60,12 +60,12 @@ def create_mod(util):
     util.setmap('BlockEventData.getEventID',endw(lines[pos],3))
     pos = findOps(lines,pos+1,[['.method','public','()I']])
     util.setmap('BlockEventData.getEventParameter',endw(lines[pos],3))
-    pos = findOps(lines,pos+1,[['.method','public','()L'+util.getmap('Block')]])
+    pos = findOps(lines,0,[['.method','public','()L'+util.getmap('Block')]])
     util.setmap('BlockEventData.getBlock',endw(lines[pos],3))
 
     lines = util.readj('Block')
-    pos = findOps(lines,0,[['tile.']])
-    pos = goBackTo(lines,pos,['.method','public','()Ljava/lang/String;'])
+    pos = findOps(lines,0,[['()Ljava/lang/String;']])
+    pos = findOps(lines,pos+1,[['.method','public','()Ljava/lang/String;']])
     util.setmap('Block.getUnlocalizedName',endw(lines[pos],3))
 
 
