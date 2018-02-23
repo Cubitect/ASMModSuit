@@ -101,13 +101,21 @@ def startInstall():
 
     try:
         mkrls = False
+        fixMCL8475 = False
         if not util.isrelease():
             mkrls = tkMessageBox.askyesno(
                 'Jar is a Snapshot',
                 'The original Mincraft version appears to be a SNAPSHOT. '+
                 'Snapshots may be atomatically deleted by the Minecraft Launcher.\n\n'+
                 'Would you like to change the modded version to a RELEASE?')
-        util.install(instver.get(), mkrls)
+        if util.usesnewjson():
+            fixMCL8475 = tkMessageBox.askyesno(
+                'MCL-8475',
+                'The version.json file uses the new argument format. '+
+                'Minecraft Launcher 1.6.84j does not work well with this '+
+                'because of MCL-8475.\n\n'+
+                'Would you like to use the legacy argument format?')
+        util.install(instver.get(), mkrls, fixMCL8475)
 
     except Exception as e:
         tkMessageBox.showerror("Error", "Something went wrong while creating the modded version:\n" + str(e))

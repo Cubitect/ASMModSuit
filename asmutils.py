@@ -122,7 +122,15 @@ class Util:
                     return False
         return True
 
-    def install(self,instver,mkrls):
+    def usesnewjson(self):
+        oldjson = join(self.jardir,self.vernam+'.json')
+        if(isfile(oldjson) and self.side == 'client'):
+            with open(oldjson,'r') as fin:
+                if any(['"arguments":' in l for l in fin.readlines()]):
+                    return True
+        return False
+
+    def install(self,instver,mkrls,fixMCL8475):
         # create the mod
         print 'Reassembling the modded classes...'
         self.asmpyall()
@@ -137,6 +145,13 @@ class Util:
         if isfile(instjar):
             os.remove(instjar)
         os.rename(instzip,instjar)
+
+        # json fix
+        legacymcarg = '  "minecraftArguments": "--username ${auth_player_name}'+\
+            ' --version ${version_name} --gameDir ${game_directory}'+\
+            ' --assetsDir ${assets_root} --assetIndex ${assets_index_name}'+\
+            ' --uuid ${auth_uuid} --accessToken ${auth_access_token}'+\
+            ' --userType ${user_type} --versionType ${version_type}",\n'
 
         oldjson = join(self.jardir,self.vernam+'.json')
         if(isfile(oldjson) and self.side == 'client'):
@@ -161,6 +176,24 @@ class Util:
                                     bracketCnt -= 1
                         if mkrls and ('"type": "snapshot"' in line):
                             line = line.replace('snapshot','release')
+                        if fixMCL8475:
+                            if '"libraries":' in line:
+                                fout.write(legacymcarg)
+                            if '"assetIndex":' in line:
+                                nextline = next(fin)
+                                while '"arguments":' not in nextline:
+                                    fout.write(line)
+                                    line = nextline
+                                    nextline = next(fin)
+                                bracketCnt = 1
+                                while bracketCnt > 0:
+                                    line = next(fin)
+                                    if line is None:
+                                        break
+                                    if '{' in line:
+                                        bracketCnt += 1
+                                    if '}' in line:
+                                        bracketCnt -= 1
                         fout.write(line)
 
 def copytree(root_src_dir, root_dst_dir):
