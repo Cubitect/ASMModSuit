@@ -29,10 +29,12 @@ def setup_lib(util):
     pos = findOps(lines,pos+1,[['.field',';']])
     util.setmap('FontRenderer',betweenr(lines[pos],'L',';'))
     util.setmap('Minecraft.fontRendererObj',endw(lines[pos],2))
-    pos = findOps(lines,pos+1,[['.field','I ']])
-    pos = goBackTo(lines,pos,['.field',';']) #DebugRenderer
-    pos = goBackTo(lines,pos,['.field',';'])
-    util.setmap('EntityRenderer',betweenr(lines[pos],'L',';'))
+    pos = findOps(lines,pos+1,[['.field',';']]) # standardGalacticFontRenderer
+    pos = findOps(lines,pos+1,[['.field',';']]) # GuiScreen currentScreen;
+    pos = findOps(lines,pos+1,[['.field',';']]) # [changes across versions]
+    entrndrcheck = [betweenr(lines[pos],'L',';')]
+    pos = findOps(lines,pos+1,[['.field',';']])
+    entrndrcheck += [betweenr(lines[pos],'L',';')]
     pos = findOps(lines,0,[['.method','public','static','()L'+util.getmap('Minecraft')]])
     util.setmap('Minecraft.getMinecraft',endw(lines[pos],3))
     pos = findOps(lines,pos+1,[['.method','public','()Z']])
@@ -44,6 +46,17 @@ def setup_lib(util):
     pos = findOps(lines,pos+1,[['.method','public','()L']])
     util.setmap('Minecraft.getIntegratedServer',endw(lines[pos],3))
     util.setmap('IntegratedServer',betweenr(lines[pos],'()L',';'))
+    print 'Looking for EntityRenderer...'
+    for entrendr in entrndrcheck:
+        print '  Checking ' + entrendr + '...\t',
+        util.maps[entrendr] = entrendr # set the map quietly
+        lines = util.readj(entrendr)
+        if any('culling' in l for l in lines):
+            print 'YES'
+            util.setmap('EntityRenderer',entrendr)
+            break
+        else:
+            print 'NO'
 
     lines = util.readj('Entity')
     pos = findOps(lines,0,[['.field','protected','Z'],['.field','protected','I'],['.field','public','I']])
